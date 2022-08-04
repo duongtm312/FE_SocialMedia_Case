@@ -380,21 +380,8 @@ Header END -->
                 <!-- Chat list tab START -->
                 <div class="mt-4 h-100">
                   <div class="chat-tab-list custom-scrollbar">
-                    <ul class="nav flex-column nav-pills nav-pills-soft">
-                      <li data-bs-dismiss="offcanvas">
-                        <!-- Chat user tab item -->
-                        <a class="nav-link active text-start" id="chat-1-tab" data-bs-toggle="pill" role="tab" onclick="connect(friendname)">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 avatar avatar-story me-2 ">
-                              <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
-                            </div>
-                            <div class="flex-grow-1 d-block">
-                              <h6 class="mb-0 mt-1">Frances Guerrero</h6>
-                              <div class="small text-secondary">Frances sent a photo.</div>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
+                    <ul class="nav flex-column nav-pills nav-pills-soft" id="showFriendsChat">
+
                     </ul>
                   </div>
                 </div>
@@ -552,6 +539,7 @@ JS libraries, plugins and custom scripts -->
 <script src="assets/js/functions.js"></script>
 <script src="assets/jsChat/webSocket.js"></script>
 <script src="assets/jsChat/stomp.js"></script>
+<script src="assets/jsChat/message.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </body>
 </html>
