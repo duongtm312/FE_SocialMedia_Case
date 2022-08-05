@@ -205,7 +205,7 @@ function onMessageReceived(payload) {
             `
         showMessage.innerHTML += str
     }else {
-let str=`  <!-- Chat message right -->
+        let str=`  <!-- Chat message right -->
                   <div class="d-flex justify-content-end text-end mb-1">
                     <div class="w-100">
                       <div class="d-flex flex-column align-items-end">
