@@ -531,11 +531,12 @@ Header END -->
                 <!-- Title START -->
                 <div class="card-body">
                   <!-- Settings START -->
-                  <form class="row g-3">
+                  <div class="row g-3">
+                      <span id="changePasswordError"></span>
                     <!-- Current password -->
                     <div class="col-12">
-                      <label class="form-label">Current password</label>
-                      <input type="text" class="form-control" placeholder="">
+                      <label  class="form-label">Current password</label>
+                      <input type="text" id="oldPassword" class="form-control" placeholder="">
                     </div>
                     <!-- New password -->
                     <div class="col-12">
@@ -554,13 +555,13 @@ Header END -->
                     <!-- Confirm password -->
                     <div class="col-12">
                       <label class="form-label">Confirm password</label>
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" id="confirmNewPassword" class="form-control" placeholder="">
                     </div>
                     <!-- Button  -->
                     <div class="col-12 text-end">
-                      <button type="submit" class="btn btn-primary mb-0">Update password</button>
+                      <button type="submit" class="btn btn-primary mb-0" onclick="changePassword()">Update password</button>
                     </div>
-                  </form>
+                  </div>
                   <!-- Settings END -->
                 </div>
               </div>
@@ -1195,6 +1196,8 @@ JS libraries, plugins and custom scripts -->
 <!-- Template Functions -->
 <script src="assets/js/functions.js"></script>
 <script src="assets/js/editProfile.js"></script>
+
+<script src="ajax/changePassword.js"></script>
 
 </body>
 </html>

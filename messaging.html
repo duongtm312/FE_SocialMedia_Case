@@ -14,6 +14,7 @@
 
 	<!-- Google Font -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
 
 	<!-- Plugins CSS -->
@@ -404,11 +405,10 @@ Header END -->
                 <div class="d-sm-flex justify-content-between align-items-center">
                   <div class="d-flex mb-2 mb-sm-0">
                     <div class="flex-shrink-0 avatar me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
+                      <img class="avatar-img rounded-circle" id="imgSrcMessage"src="https://vnn-imgs-a1.vgcloud.vn/image1.ictnews.vn/_Files/2020/03/17/trend-avatar-1.jpg" alt="">
                     </div>
                     <div class="d-block flex-grow-1">
-                      <h6 class="mb-0 mt-1">Judy Nguyen</h6>
-                      <div class="small text-secondary"><i class="fa-solid fa-circle text-success me-1"></i>Online</div>
+                      <h6 class="mb-0 mt-1" id="nameMessage"></h6>
                     </div>
                   </div>
                   <div class="d-flex align-items-center">
@@ -433,47 +433,21 @@ Header END -->
                 <!-- Top avatar and status END -->
                 <hr>
                 <!-- Chat conversation START -->
-                <div class="chat-conversation-content custom-scrollbar">
-                  <!-- Chat time -->
-                  <div class="text-center small my-2">Jul 16, 2022, 06:15 am</div>
-                  <!-- Chat message left -->
-                  <div class="d-flex mb-1">
-                    <div class="flex-shrink-0 avatar avatar-xs me-2">
-                      <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
+                <div class="chat-conversation-content custom-scrollbar" >
+                    <div id="showMessage">
+
                     </div>
-                    <div class="flex-grow-1">
-                      <div class="w-100">
-                        <div class="d-flex flex-column align-items-start">
-                          <div class="bg-light text-secondary p-2 px-3 rounded-2">Applauded no discovery in newspaper allowance am northward😊</div>
-                          <div class="small my-2">6:15 AM</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Chat message right -->
-                  <div class="d-flex justify-content-end text-end mb-1">
-                    <div class="w-100">
-                      <div class="d-flex flex-column align-items-end">
-                        <div class="bg-primary text-white p-2 px-3 rounded-2">No visited raising gravity outward subject my cottage Mr be.</div>
-                        <div class="d-flex my-2">
-                          <div class="small text-secondary">6:20 AM</div>
-                          <div class="small ms-2"><i class="fa-solid fa-check-double text-info"></i></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-                <!-- Chat conversation END -->
               </div>
-              <!-- Conversation item END -->
             </div>
           </div>
+        </div>
           <div class="card-footer">
-            <div class="d-sm-flex align-items-end" >
-              <textarea class="form-control mb-sm-0 mb-3" data-autoresize placeholder="Type a message" rows="1" id="message"></textarea>
-              <button class="btn btn-sm btn-danger-soft ms-sm-2"><i class="fa-solid fa-face-smile fs-6"></i></button>
-              <button class="btn btn-sm btn-secondary-soft ms-2"><i class="fa-solid fa-paperclip fs-6"></i></button>
-              <button class="btn btn-sm btn-primary ms-2"><i class="fa-solid fa-paper-plane fs-6" id="messageButton"></i></button>
+            <div class="d-sm-flex align-items-end"  >
+                <textarea class="form-control mb-sm-0 mb-3" data-autoresize placeholder="Type a message" rows="1" id="messageInput"></textarea>
+            <div id="summitMessage" style="display: flex">
+
+            </div>
             </div>
           </div>
         </div>
@@ -488,42 +462,6 @@ Header END -->
 
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
-
-<!-- Chat START -->
-<div class="position-fixed bottom-0 end-0 p-3">
-
-  <!-- Chat toast START -->
-  <div id="chatToast" class="toast bg-mode" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
-    <div class="toast-header bg-mode d-flex justify-content-between">
-      <!-- Title -->
-      <h6 class="mb-0">New message</h6>
-      <button class="btn btn-secondary-soft-hover py-1 px-2" data-bs-dismiss="toast" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <!-- Top avatar and status END -->
-    <div class="toast-body collapse show" id="collapseChat">
-      <!-- Chat conversation START -->
-      <!-- Form -->
-      <form>
-        <div class="input-group mb-3">
-          <span class="input-group-text border-0">To</span>
-          <input class="form-control" type="text" placeholder="Type a name or multiple names">
-        </div>
-      </form>
-      <!-- Chat conversation END -->
-      <!-- Extra space -->
-      <div class="h-200px"></div>
-      <!-- Button  -->
-      <div class="d-sm-flex align-items-end">
-        <textarea class="form-control mb-sm-0 mb-3" placeholder="Type a message" rows="1" spellcheck="false"></textarea>
-        <button class="btn btn-sm btn-danger-soft ms-sm-2"><i class="fa-solid fa-face-smile fs-6"></i></button>
-        <button class="btn btn-sm btn-secondary-soft ms-2"><i class="fa-solid fa-paperclip fs-6"></i></button>
-        <button class="btn btn-sm btn-primary ms-2"><i class="fa-solid fa-paper-plane fs-6"></i></button>
-      </div>
-    </div>
-  </div>
-  <!-- Chat toast END -->
-
-</div>
 <!-- Chat END -->
 
 <!-- =======================
@@ -540,6 +478,6 @@ JS libraries, plugins and custom scripts -->
 <script src="assets/jsChat/webSocket.js"></script>
 <script src="assets/jsChat/stomp.js"></script>
 <script src="assets/jsChat/message.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 </body>
 </html>
