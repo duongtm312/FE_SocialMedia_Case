@@ -98,7 +98,7 @@ function getChat(data, img, name) {
     showMessage.innerHTML = str
     summitChat.innerHTML = `
               <button class="btn btn-sm btn-secondary-soft ms-2"><i class="fa-solid fa-paperclip fs-6"></i></button>
-              <button class="btn btn-sm btn-primary ms-2"><i class="fa-solid fa-paper-plane fs-6" id="messageButton" onclick="getUserOn(${name})" ></i></button>`
+              <button class="btn btn-sm btn-primary ms-2"><i class="fa-solid fa-paper-plane fs-6" id="messageButton" onclick="getUserOn('${name}')" ></i></button>`
 
 }
 
