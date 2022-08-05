@@ -26,7 +26,8 @@
 
 	<!-- Theme CSS -->
 	<link id="style-switch" rel="stylesheet" type="text/css" href="assets/css/style.css">
-	 
+    <script src="ajax/changeAvatar.js"></script>
+
 </head>
 
 <body>
@@ -331,7 +332,7 @@ Header END -->
 
 <!-- **************** MAIN CONTENT START **************** -->
 <main>
-  
+
   <!-- Container START -->
   <div class="container">
     <div class="row g-4">
@@ -341,14 +342,17 @@ Header END -->
         <!-- My profile START -->
         <div class="card">
           <!-- Cover image -->
-          <div class="h-200px rounded-top" style="background-image:url(assets/images/bg/05.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+            <a  href="#!" data-bs-toggle="modal" data-bs-target="#feedActionPhoto" >  <div class="h-200px rounded-top" style="background-image:url(assets/images/bg/05.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
+
+          </div></a>
             <!-- Card body START -->
             <div class="card-body py-0">
               <div class="d-sm-flex align-items-start text-center text-sm-start">
                 <div>
                   <!-- Avatar -->
                   <div class="avatar avatar-xxl mt-n5 mb-3">
-                    <img class="avatar-img rounded-circle border border-white border-3" src="assets/images/avatar/07.jpg" alt="">
+                      <a href="#!" data-bs-toggle="modal" data-bs-target="#feedActionVideo"> <img src="https://static2.yan.vn/YanNews/2167221/202003/dan-mang-du-trend-thiet-ke-avatar-du-kieu-day-mau-sac-tu-anh-mac-dinh-b0de2bad.jpg" class="avatar-img rounded-circle border border-white border-3"></a>
+                      <tbody id="show"></tbody>
                   </div>
                 </div>
                 <div class="ms-sm-4 mt-sm-3">
@@ -1084,8 +1088,7 @@ Header END -->
     <div class="modal-content">
       <!-- Modal feed header START -->
       <div class="modal-header">
-        <h5 class="modal-title" id="feedActionPhotoLabel">Add post photo</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="feedActionPhotoLabel">Change cover photo</h5>
       </div>
       <!-- Modal feed header END -->
 
@@ -1095,7 +1098,7 @@ Header END -->
         <div class="d-flex mb-3">
           <!-- Avatar -->
           <div class="avatar avatar-xs me-2">
-            <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="">
+            <img class="avatar-img rounded-circle" src="https://loanthehongnhan.vn/hinh-anh-ve-meo/imager_27122.jpg" alt="">
           </div>
           <!-- Feed box  -->
           <form class="w-100">
@@ -1121,7 +1124,7 @@ Header END -->
         <!-- Modal feed footer -->
         <div class="modal-footer ">
           <!-- Button -->
-            <button type="button" class="btn btn-danger-soft me-2" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger-soft me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
             <button type="button" class="btn btn-success-soft">Post</button>
         </div>
         <!-- Modal feed footer -->
@@ -1136,8 +1139,7 @@ Header END -->
     <div class="modal-content">
      <!-- Modal feed header START -->
      <div class="modal-header">
-      <h5 class="modal-title" id="feedActionVideoLabel">Add post video</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <h5 class="modal-title" id="feedActionVideoLabel">Change Avatar</h5>
     </div>
     <!-- Modal feed header END -->
 
@@ -1147,7 +1149,7 @@ Header END -->
        <div class="d-flex mb-3">
         <!-- Avatar -->
         <div class="avatar avatar-xs me-2">
-          <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="">
+          <img class="avatar-img rounded-circle" src="https://i.pinimg.com/564x/27/7a/06/277a06d75018f55248c46cdd7701100e.jpg" alt="">
         </div>
         <!-- Feed box  -->
         <form class="w-100">
@@ -1156,15 +1158,11 @@ Header END -->
       </div>
 
       <!-- Dropzone photo START -->
-      <div>
-        <label class="form-label">Upload attachment</label>
-        <div class="dropzone dropzone-default card shadow-none" data-dropzone='{"maxFiles":2}'>
-          <div class="dz-message">
-            <i class="bi bi-camera-reels display-3"></i>
-                <p>Drag here or click to upload video.</p>
+          <div class="modal-body">
+              <table>
+                  <tr><td><input id="img" type="file"></td></tr>
+              </table>
           </div>
-        </div>
-      </div>
       <!-- Dropzone photo END -->
 
     </div>
@@ -1173,8 +1171,8 @@ Header END -->
       <!-- Modal feed footer -->
       <div class="modal-footer">
         <!-- Button -->
-        <button type="button" class="btn btn-danger-soft me-2"><i class="bi bi-camera-video-fill pe-1"></i> Live video</button>
-        <button type="button" class="btn btn-success-soft">Post</button>
+          <button type="button" class="btn btn-danger-soft me-2" data-bs-dismiss="modal" aria-label="Close">Close</button>
+        <button type="button" class="btn btn-success-soft" data-dismiss="modal" onclick="uploadFile()">Post</button>
       </div>
       <!-- Modal feed footer -->
     </div>
@@ -1301,6 +1299,6 @@ JS libraries, plugins and custom scripts -->
 
 <!-- Template Functions -->
 <script src="assets/js/functions.js"></script>
- 
+
 </body>
 </html>

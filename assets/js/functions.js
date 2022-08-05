@@ -1,7 +1,9 @@
+// noinspection LossyEncoding
+
 /**
 * Social 
 *
-* 更多精品模板：http://www.bootstrapmb.com
+* 锟斤拷锟洁精品模锟藉：http://www.bootstrapmb.com
 * @version 1.0.0
 **/
 
