@@ -74,7 +74,7 @@ function show(data) {
           <div class="card-body">
             <p>${p.contentPost}</p>
             <!-- Card img -->
-            <img class="card-img" src="assets/images/post/3by2/01.jpg" alt="Post">
+            <img class="card-img" src="${p.photoPostSrc}" alt="Post">
             <!-- Feed react START -->
             <ul class="nav nav-stack py-3 small">
               <li class="nav-item">
@@ -332,4 +332,52 @@ function showDateProfile(dataProfile){
           </div>`
 
     document.getElementById("profile").innerHTML = str;
+}
+
+function uploadFile () {
+    console.log("vào up file")
+    let fileImg = document.getElementById("img").files;
+    console.log(fileImg)
+    let formData = new FormData();
+    formData.append("file", fileImg[0]);
+    $.ajax({
+        contentType: false,
+        processData: false,
+        type: "POST",
+        data: formData,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "Bearer " + token);
+        },
+        url: "http://localhost:8081/home/upImg",
+        success: function (data) {
+            console.log(data)
+            createPost(data);
+        }
+    });
+}
+function createPost(data) {
+    let contentPost = $("#stt").val();
+    let post = {
+        contentPost: contentPost,
+        photoPostSrc: data,
+    }
+    $.ajax({
+        type: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "Bearer " + token);
+        },
+        url: "http://localhost:8081/home/createPost ",
+        data: JSON.stringify(post),
+        //xử lý khi thành công
+        success: function (data) {
+
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
 }
