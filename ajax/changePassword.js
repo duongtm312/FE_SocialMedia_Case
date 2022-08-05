@@ -24,7 +24,7 @@ function changePassword(){
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
-        url: "http://localhost:8081/changePassword  " ,
+        url: "http://localhost:8081/changePassword" ,
         data: JSON.stringify(changePassword),
         success: function (data) {
             console.log(data)

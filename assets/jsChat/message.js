@@ -24,7 +24,7 @@ function showFriend(data){
     for (const pf of data) {
         str+=` <li data-bs-dismiss="offcanvas">
                         <!-- Chat user tab item -->
-                        <a class="nav-link active text-start" id="chat-1-tab" data-bs-toggle="pill" role="tab" onclick="connect(${pf.appUser.userName})">
+                        <a class="nav-link active text-start" id="chat-1-tab" data-bs-toggle="pill" role="tab" onclick="connect('${pf.appUser.userName}')">
                           <div class="d-flex">
                             <div class="flex-shrink-0 avatar avatar-story me-2 ">
                               <img class="avatar-img rounded-circle" src="${pf.avatarSrc}" alt="">
