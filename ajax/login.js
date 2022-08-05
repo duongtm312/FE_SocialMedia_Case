@@ -30,6 +30,7 @@ function login() {
 }
 
 function logout() {
-    console.log("vao")
+    console.log("ok")
     localStorage.setItem("token", "")
+    location.href = "sign-in-advance.html"
 }

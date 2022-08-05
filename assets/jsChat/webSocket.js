@@ -19,7 +19,7 @@ function loadImgAndName(name) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
         data: {
-            name: name,
+            name: name
         },
         url: "http://localhost:8081/api/chat/name",
         //xử lý khi thành công
