@@ -19,7 +19,6 @@ function login() {
         //xử lý khi thành công
         success: function (data) {
             localStorage.setItem("token", data);
-            console.log("alo")
             location.href = "index.html"
         },
         error: function (err) {
