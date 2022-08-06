@@ -30,7 +30,6 @@ function login() {
 }
 
 function logout() {
-    console.log("ok")
     localStorage.setItem("token", "")
     location.href = "sign-in-advance.html"
 }

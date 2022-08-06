@@ -1,8 +1,10 @@
+
+
 let token = localStorage.getItem("token");
 postHome();
 showProfile()
 
-function postHome() {
+function postHome (){
     $.ajax({
         type: "GET",
         headers: {
@@ -13,7 +15,7 @@ function postHome() {
         },
         beforeSend: function (xhr) {
             console.log(token)
-            xhr.setRequestHeader("Authorization", "Bearer " + token);
+            xhr.setRequestHeader ("Authorization", "Bearer " + token);
         },
         url: "http://localhost:8081/home/post",
         // data: JSON.stringify(),
@@ -39,12 +41,12 @@ function show(data) {
               <div class="d-flex align-items-center">
                 <!-- Avatar -->
                 <div class="avatar avatar-story me-2">
-                  <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt=""> </a>
+                  <a href="#!"> <img class="avatar-img rounded-circle" src="${p.profile.avatarSrc}" alt=""> </a>
                 </div>
                 <!-- Info -->
                 <div>
                   <div class="nav nav-divider">
-                    <h6 class="nav-item card-title mb-0"> <a href="#!"> ${p.appUser.userName} </a></h6>
+                    <h6 class="nav-item card-title mb-0"> <a href="#!"> ${p.profile.fullName} </a></h6>
                     <span class="nav-item small" > ${p.timePost}</span>
                   </div>
                 </div>
@@ -76,7 +78,7 @@ function show(data) {
             <!-- Feed react START -->
             <ul class="nav nav-stack py-3 small">
               <li class="nav-item">
-                <a class="nav-link active btn" href="#!"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Liked (${p.numLikePost})</a>
+                <a class="nav-link active btn" onclick="createLike(${p.idPost})"> <i class="bi bi-hand-thumbs-up-fill pe-1" ></i> Liked (${p.numLikePost})</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link btn"  onclick="getComment(${p.idPost})"> <i class="bi bi-chat-fill pe-1"></i>Comments (${p.numCommentPost})</a>
@@ -104,7 +106,7 @@ function show(data) {
             <div class="d-flex mb-3">
               <!-- Avatar -->
               <div class="avatar avatar-xs me-2">
-                <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/avatar/12.jpg" alt=""> </a>
+                <a href="#!"> <img class="avatar-img rounded-circle avatarHome" src="" alt=""> </a>
               </div>
               <!-- Comment box  -->
               <form class="w-100">
@@ -158,8 +160,7 @@ function show(data) {
     }
     document.getElementById("showhome").innerHTML = str;
 }
-
-function showProfile() {
+function showProfile(){
     $.ajax({
         type: "GET",
         headers: {
@@ -170,7 +171,7 @@ function showProfile() {
         },
         beforeSend: function (xhr) {
             console.log(token)
-            xhr.setRequestHeader("Authorization", "Bearer " + token);
+            xhr.setRequestHeader ("Authorization", "Bearer " + token);
         },
         url: "http://localhost:8081/home/profile",
         // data: JSON.stringify(),
@@ -186,7 +187,7 @@ function showProfile() {
     })
 }
 
-function showDateProfile(dataProfile) {
+function showDateProfile(dataProfile){
     let str = `<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSideNavbar">
             <!-- Offcanvas header -->
             <div class="offcanvas-header">
@@ -208,7 +209,7 @@ function showDateProfile(dataProfile) {
                     </div>
                     <!-- Info -->
                     <h5 class="mb-0"> <a href="#!">${dataProfile.fullName} </a> </h5>
-                    <small> ${dataProfile.job}</small>
+                    <small>C0322G1</small>
                     <p class="mt-3">Bug nhiều chán qá rồi</p>
 
                     <!-- User stat START -->
@@ -295,9 +296,10 @@ function showDateProfile(dataProfile) {
           </div>`
 
     document.getElementById("profile").innerHTML = str;
+    document.getElementById("avatarHome").src = dataProfile.avatarSrc;
 }
 
-function uploadFile() {
+function uploadFile () {
     console.log("vào up file")
     let fileImg = document.getElementById("img").files;
     console.log(fileImg)
@@ -309,7 +311,7 @@ function uploadFile() {
         type: "POST",
         data: formData,
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + token);
+            xhr.setRequestHeader ("Authorization", "Bearer " + token);
         },
         url: "http://localhost:8081/home/upImg",
         success: function (data) {
@@ -318,7 +320,6 @@ function uploadFile() {
         }
     });
 }
-
 function createPost(data) {
     let contentPost = $("#stt").val();
     let post = {
@@ -332,7 +333,7 @@ function createPost(data) {
             'Content-Type': 'application/json'
         },
         beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + token);
+            xhr.setRequestHeader ("Authorization", "Bearer " + token);
         },
         url: "http://localhost:8081/home/createPost ",
         data: JSON.stringify(post),
@@ -380,13 +381,13 @@ function showComment(data,idPost) {
                 <div class="d-flex position-relative">
                   <!-- Avatar -->
                   <div class="avatar avatar-xs">
-                    <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt=""></a>
+                    <a href="#!"><img class="avatar-img rounded-circle" src="${cmt.profile.avatarSrc}" alt=""></a>
                   </div>
                   <div class="ms-2">
                     <!-- Comment by -->
                     <div class="bg-light rounded-start-top-0 p-3 rounded">
                       <div class="d-flex justify-content-between">
-                        <h6 class="mb-1"> <a href="#!"> ${cmt.appUser.userName} </a></h6>
+                        <h6 class="mb-1"> <a href="#!"> ${cmt.profile.fullName} </a></h6>
                         <small class="ms-2">${cmt.timeCmt}</small>
                       </div>
                       <p class="small mb-0">${cmt.contentCmt}</p>
@@ -410,4 +411,34 @@ function showComment(data,idPost) {
     }
     let id = "showComment" + idPost;
     document.getElementById(id).innerHTML = str;
+}
+function createLike(id) {
+    // let like = {
+    //     post: {
+    //         id: id
+    //     }
+
+    token = localStorage.getItem("token")
+    $.ajax({
+        type: "POST",
+        headers: {
+            // 'Accept': 'application/json',
+            'Content-Type': 'application/json'
+
+        },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "Bearer " + token);
+        },
+        // data: JSON.stringify(),
+
+        url: "http://localhost:8081/like/" + id,
+        success: function () {
+            console.log("thanh cong ")
+        },
+        error: function (err) {
+            console.log("loi")
+            postHome()
+            console.log(err)
+        }
+    })
 }
