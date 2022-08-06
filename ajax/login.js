@@ -18,7 +18,6 @@ function login() {
         data: JSON.stringify(appUser),
         //xử lý khi thành công
         success: function (data) {
-            alert("aa")
             localStorage.setItem("token", data);
             console.log("alo")
             location.href = "index.html"
@@ -32,7 +31,6 @@ function login() {
 }
 
 function logout() {
-    console.log("ok")
     localStorage.setItem("token", "")
     location.href = "sign-in-advance.html"
 }
