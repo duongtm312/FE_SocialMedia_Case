@@ -31,7 +31,7 @@ function changePassword(){
             location.href = "settings.html"
         },
         error: function (err) {
-            document.getElementById('changePasswordError').innerHTML = "Login fail ! Try again please !";
+            document.getElementById('changePasswordError').innerHTML = `  <p style="filter: brightness(120%)" id="messageFailed" class="small-font text-uppercase text-center py-2 text-danger bg-danger-light2 ">Change password fail ! Please try again !</p>`
         }
     })
 
