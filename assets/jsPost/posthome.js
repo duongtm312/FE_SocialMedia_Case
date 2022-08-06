@@ -1,10 +1,8 @@
-
-
 let token = localStorage.getItem("token");
 postHome();
 showProfile()
 
-function postHome (){
+function postHome() {
     $.ajax({
         type: "GET",
         headers: {
@@ -15,7 +13,7 @@ function postHome (){
         },
         beforeSend: function (xhr) {
             console.log(token)
-            xhr.setRequestHeader ("Authorization", "Bearer " + token);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
         url: "http://localhost:8081/home/post",
         // data: JSON.stringify(),
@@ -78,10 +76,10 @@ function show(data) {
             <!-- Feed react START -->
             <ul class="nav nav-stack py-3 small">
               <li class="nav-item">
-                <a class="nav-link active" href="#!"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Liked (${p.numLikePost})</a>
+                <a class="nav-link active btn" href="#!"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Liked (${p.numLikePost})</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comments (${p.numCommentPost})</a>
+                <a class="nav-link btn"  onclick="getComment(${p.idPost})"> <i class="bi bi-chat-fill pe-1"></i>Comments (${p.numCommentPost})</a>
               </li>
               <!-- Card share action START -->
               <li class="nav-item dropdown ms-sm-auto">
@@ -114,76 +112,40 @@ function show(data) {
               </form>
             </div>
             <!-- Comment wrap START -->
-            <ul class="comment-wrap list-unstyled">
-              <!-- Comment item START -->
-              <li class="comment-item">
-                <div class="d-flex position-relative">
-                  <!-- Avatar -->
-                  <div class="avatar avatar-xs">
-                    <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt=""></a>
-                  </div>
-                  <div class="ms-2">
-                    <!-- Comment by -->
-                    <div class="bg-light rounded-start-top-0 p-3 rounded">
-                      <div class="d-flex justify-content-between">
-                        <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
-                        <small class="ms-2">5hr</small>
-                      </div>
-                      <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
-                    </div>
-                    <!-- Comment react -->
-                    <ul class="nav nav-divider py-2 small">
-                      <li class="nav-item">
-                        <a class="nav-link" href="#!"> Like (3)</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#!"> Reply</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#!"> View 5 replies</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <!-- Comment item nested START -->
-                <ul class="comment-item-nested list-unstyled">
-                  <!-- Comment item START -->
-                  <li class="comment-item">
-                    <div class="d-flex">
-                      <!-- Avatar -->
-                      <div class="avatar avatar-xs">
-                        <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/06.jpg" alt=""></a>
-                      </div>
-                      <!-- Comment by -->
-                      <div class="ms-2">
-                        <div class="bg-light p-3 rounded">
-                          <div class="d-flex justify-content-between">
-                            <h6 class="mb-1"> <a href="#!"> Lori Stevens </a> </h6>
-                            <small class="ms-2">2hr</small>
-                          </div>
-                          <p class="small mb-0">See resolved goodness felicity shy civility domestic had but Drawings offended yet answered Jennings perceive.</p>
-                        </div>
-                        <!-- Comment react -->
-                        <ul class="nav nav-divider py-2 small">
-                          <li class="nav-item">
-                            <a class="nav-link" href="#!"> Like (5)</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#!"> Reply</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-                <!-- Load more replies -->
-                <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center mb-3 ms-5" data-bs-toggle="button" aria-pressed="true">
-                </a>
-                <!-- Comment item nested END -->
-              </li>
-              <!-- Comment item END -->
-
-            </ul>
+            <ul class="comment-wrap list-unstyled" id="showComment${p.idPost}">
+<!--            -->
+<!--              &lt;!&ndash; Comment item START &ndash;&gt;-->
+<!--              <li class="comment-item">-->
+<!--                <div class="d-flex position-relative">-->
+<!--                  &lt;!&ndash; Avatar &ndash;&gt;-->
+<!--                  <div class="avatar avatar-xs">-->
+<!--                    <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt=""></a>-->
+<!--                  </div>-->
+<!--                  <div class="ms-2">-->
+<!--                    &lt;!&ndash; Comment by &ndash;&gt;-->
+<!--                    <div class="bg-light rounded-start-top-0 p-3 rounded">-->
+<!--                      <div class="d-flex justify-content-between">-->
+<!--                        <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>-->
+<!--                        <small class="ms-2">5hr</small>-->
+<!--                      </div>-->
+<!--                      <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; Comment react &ndash;&gt;-->
+<!--                    <ul class="nav nav-divider py-2 small">-->
+<!--                      <li class="nav-item">-->
+<!--                        <a class="nav-link" href="#!"> Like (3)</a>-->
+<!--                      </li>-->
+<!--                    </ul>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; Comment item nested START &ndash;&gt;-->
+<!--                &lt;!&ndash; Load more replies &ndash;&gt;-->
+<!--                <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center mb-3 ms-5" data-bs-toggle="button" aria-pressed="true">-->
+<!--                </a>-->
+<!--                &lt;!&ndash; Comment item nested END &ndash;&gt;-->
+<!--              </li>-->
+<!--              &lt;!&ndash; Comment item END &ndash;&gt;-->
+<!--            </ul>-->
             <!-- Comment wrap END -->
           </div>
           <!-- Card body END -->
@@ -196,7 +158,8 @@ function show(data) {
     }
     document.getElementById("showhome").innerHTML = str;
 }
-function showProfile(){
+
+function showProfile() {
     $.ajax({
         type: "GET",
         headers: {
@@ -207,7 +170,7 @@ function showProfile(){
         },
         beforeSend: function (xhr) {
             console.log(token)
-            xhr.setRequestHeader ("Authorization", "Bearer " + token);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
         url: "http://localhost:8081/home/profile",
         // data: JSON.stringify(),
@@ -223,7 +186,7 @@ function showProfile(){
     })
 }
 
-function showDateProfile(dataProfile){
+function showDateProfile(dataProfile) {
     let str = `<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSideNavbar">
             <!-- Offcanvas header -->
             <div class="offcanvas-header">
@@ -245,7 +208,7 @@ function showDateProfile(dataProfile){
                     </div>
                     <!-- Info -->
                     <h5 class="mb-0"> <a href="#!">${dataProfile.fullName} </a> </h5>
-                    <small>C0322G1</small>
+                    <small> ${dataProfile.job}</small>
                     <p class="mt-3">Bug nhiều chán qá rồi</p>
 
                     <!-- User stat START -->
@@ -334,7 +297,7 @@ function showDateProfile(dataProfile){
     document.getElementById("profile").innerHTML = str;
 }
 
-function uploadFile () {
+function uploadFile() {
     console.log("vào up file")
     let fileImg = document.getElementById("img").files;
     console.log(fileImg)
@@ -346,7 +309,7 @@ function uploadFile () {
         type: "POST",
         data: formData,
         beforeSend: function (xhr) {
-            xhr.setRequestHeader ("Authorization", "Bearer " + token);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
         url: "http://localhost:8081/home/upImg",
         success: function (data) {
@@ -355,6 +318,7 @@ function uploadFile () {
         }
     });
 }
+
 function createPost(data) {
     let contentPost = $("#stt").val();
     let post = {
@@ -368,7 +332,7 @@ function createPost(data) {
             'Content-Type': 'application/json'
         },
         beforeSend: function (xhr) {
-            xhr.setRequestHeader ("Authorization", "Bearer " + token);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
         url: "http://localhost:8081/home/createPost ",
         data: JSON.stringify(post),
@@ -380,4 +344,70 @@ function createPost(data) {
             console.log(err)
         }
     })
+}
+
+function getComment(idPost) {
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
+        url: "http://localhost:8081/home/comment/" + idPost,
+        //xử lý khi thành công
+        success: function (data) {
+            console.log(data)
+            console.log(idPost)
+            showComment(data,idPost)
+            console.log("comment")
+
+        },
+        error: function (err) {
+            console.log("loi")
+            console.log(err)
+        }
+    })
+}
+
+function showComment(data,idPost) {
+    let str = "";
+    for (const cmt of data) {
+        str += `
+             <li class="comment-item">
+                <div class="d-flex position-relative">
+                  <!-- Avatar -->
+                  <div class="avatar avatar-xs">
+                    <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt=""></a>
+                  </div>
+                  <div class="ms-2">
+                    <!-- Comment by -->
+                    <div class="bg-light rounded-start-top-0 p-3 rounded">
+                      <div class="d-flex justify-content-between">
+                        <h6 class="mb-1"> <a href="#!"> ${cmt.appUser.userName} </a></h6>
+                        <small class="ms-2">${cmt.timeCmt}</small>
+                      </div>
+                      <p class="small mb-0">${cmt.contentCmt}</p>
+                    </div>
+                    <!-- Comment react -->
+                    <ul class="nav nav-divider py-2 small">
+                      <li class="nav-item">
+                        <a class="nav-link" href="#!"> Like (${cmt.numLikeCmt})</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- Comment item nested START -->
+                <!-- Load more replies -->
+                <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center mb-3 ms-5" data-bs-toggle="button" aria-pressed="true">
+                </a>
+                <!-- Comment item nested END -->
+              </li>
+              <!-- Comment item END -->
+            </ul>`
+    }
+    let id = "showComment" + idPost;
+    document.getElementById(id).innerHTML = str;
 }
