@@ -78,10 +78,10 @@ function show(data) {
             <!-- Feed react START -->
             <ul class="nav nav-stack py-3 small">
               <li class="nav-item">
-                <a class="nav-link active" href="#!"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Liked (${p.numLikePost})</a>
+                <a class="nav-link active btn" onclick="createLike(${p.idPost})"> <i class="bi bi-hand-thumbs-up-fill pe-1" ></i> Liked (${p.numLikePost})</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comments (${p.numCommentPost})</a>
+                <a class="nav-link btn" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comments (${p.numCommentPost})</a>
               </li>
               <!-- Card share action START -->
               <li class="nav-item dropdown ms-sm-auto">
@@ -377,6 +377,36 @@ function createPost(data) {
 
         },
         error: function (err) {
+            console.log(err)
+        }
+    })
+}
+function createLike(id) {
+    // let like = {
+    //     post: {
+    //         id: id
+    //     }
+
+    token = localStorage.getItem("token")
+    $.ajax({
+        type: "POST",
+        headers: {
+            // 'Accept': 'application/json',
+            'Content-Type': 'application/json'
+
+        },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", "Bearer " + token);
+        },
+        // data: JSON.stringify(),
+
+        url: "http://localhost:8081/like/" + id,
+        success: function () {
+            console.log("thanh cong ")
+        },
+        error: function (err) {
+            console.log("loi")
+            postHome()
             console.log(err)
         }
     })
