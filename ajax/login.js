@@ -18,7 +18,9 @@ function login() {
         data: JSON.stringify(appUser),
         //xử lý khi thành công
         success: function (data) {
+            alert("aa")
             localStorage.setItem("token", data);
+            console.log("alo")
             location.href = "index.html"
         },
         error: function (err) {
