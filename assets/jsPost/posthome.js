@@ -6,27 +6,21 @@ getAddFriend()
 // show post
 function postHome() {
     $.ajax({
-        type: "GET",
-        headers: {
+        type: "GET", headers: {
             //kiểu dữ liệu nhận về
-            'Accept': 'application/json',
-            // kiểu truyền đi
+            'Accept': 'application/json', // kiểu truyền đi
             // 'Content-Type': 'application/json'
-        },
-        beforeSend: function (xhr) {
+        }, beforeSend: function (xhr) {
             console.log(token)
             xhr.setRequestHeader("Authorization", "Bearer " + token);
-        },
-        url: "http://localhost:8081/home/post",
-        // data: JSON.stringify(),
+        }, url: "http://localhost:8081/home/post", // data: JSON.stringify(),
         //xử lý khi thành công
         success: function (data) {
             console.log("thành công")
             console.log(data)
             // showProfile()
             show(data);
-        },
-        error: function (err) {
+        }, error: function (err) {
             console.log("lỗi")
         }
     })
@@ -165,26 +159,20 @@ function show(data) {
 // show profile
 function showProfile() {
     $.ajax({
-        type: "GET",
-        headers: {
+        type: "GET", headers: {
             //kiểu dữ liệu nhận về
-            'Accept': 'application/json',
-            // kiểu truyền đi
+            'Accept': 'application/json', // kiểu truyền đi
             // 'Content-Type': 'application/json'
-        },
-        beforeSend: function (xhr) {
+        }, beforeSend: function (xhr) {
             console.log(token)
             xhr.setRequestHeader("Authorization", "Bearer " + token);
-        },
-        url: "http://localhost:8081/home/profile",
-        // data: JSON.stringify(),
+        }, url: "http://localhost:8081/home/profile", // data: JSON.stringify(),
         //xử lý khi thành công
         success: function (dataProfile) {
             console.log("thành công")
             console.log(dataProfile)
             showDateProfile(dataProfile);
-        },
-        error: function (err) {
+        }, error: function (err) {
             console.log("lỗi")
         }
     })
@@ -323,15 +311,9 @@ function uploadFile() {
     let formData = new FormData();
     formData.append("file", fileImg[0]);
     $.ajax({
-        contentType: false,
-        processData: false,
-        type: "POST",
-        data: formData,
-        beforeSend: function (xhr) {
+        contentType: false, processData: false, type: "POST", data: formData, beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
-        },
-        url: "http://localhost:8081/home/upImg",
-        success: function (data) {
+        }, url: "http://localhost:8081/home/upImg", success: function (data) {
             console.log(data)
             createPost(data);
         }
@@ -341,25 +323,17 @@ function uploadFile() {
 function createPost(data) {
     let contentPost = $("#stt").val();
     let post = {
-        contentPost: contentPost,
-        photoPostSrc: data,
+        contentPost: contentPost, photoPostSrc: data,
     }
     $.ajax({
-        type: "POST",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        beforeSend: function (xhr) {
+        type: "POST", headers: {
+            'Accept': 'application/json', 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
-        },
-        url: "http://localhost:8081/home/createPost ",
-        data: JSON.stringify(post),
-        //xử lý khi thành công
+        }, url: "http://localhost:8081/home/createPost ", data: JSON.stringify(post), //xử lý khi thành công
         success: function (data) {
 
-        },
-        error: function (err) {
+        }, error: function (err) {
             console.log(err)
         }
     })
@@ -368,24 +342,18 @@ function createPost(data) {
 // show comment
 function getComment(idPost) {
     $.ajax({
-        type: "GET",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        beforeSend: function (xhr) {
+        type: "GET", headers: {
+            'Accept': 'application/json', 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
-        },
-        url: "http://localhost:8081/home/comment/" + idPost,
-        //xử lý khi thành công
+        }, url: "http://localhost:8081/home/comment/" + idPost, //xử lý khi thành công
         success: function (data) {
             console.log(data)
             console.log(idPost)
             showComment(data, idPost)
             console.log("comment")
 
-        },
-        error: function (err) {
+        }, error: function (err) {
             console.log("loi")
             console.log(err)
         }
@@ -441,22 +409,17 @@ function createLike(id) {
 
     token = localStorage.getItem("token")
     $.ajax({
-        type: "POST",
-        headers: {
+        type: "POST", headers: {
             // 'Accept': 'application/json',
             'Content-Type': 'application/json'
 
-        },
-        beforeSend: function (xhr) {
+        }, beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
-        },
-        // data: JSON.stringify(),
+        }, // data: JSON.stringify(),
 
-        url: "http://localhost:8081/like/" + id,
-        success: function () {
+        url: "http://localhost:8081/like/" + id, success: function () {
             console.log("thanh cong ")
-        },
-        error: function (err) {
+        }, error: function (err) {
             console.log("loi")
             postHome()
             console.log(err)
@@ -468,24 +431,18 @@ function createLike(id) {
 
 function getAddFriend() {
     $.ajax({
-        type: "GET",
-        headers: {
-            'Accept': 'application/json',
-            // 'Content-Type': 'application/json'
-        },
-        beforeSend: function (xhr) {
+        type: "GET", headers: {
+            'Accept': 'application/json', // 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
             console.log(token)
             xhr.setRequestHeader("Authorization", "Bearer " + token);
-        },
-        url: "http://localhost:8081/home/showaddfriend",
-        // data: JSON.stringify(),
+        }, url: "http://localhost:8081/home/showaddfriend", // data: JSON.stringify(),
         //xử lý khi thành công
         success: function (data) {
             console.log("thành công show add friend")
             console.log(data)
             showAddFriend(data)
-        },
-        error: function (err) {
+        }, error: function (err) {
             console.log("lỗi")
         }
     })
@@ -494,16 +451,57 @@ function getAddFriend() {
 function showAddFriend(data) {
     let str = ""
     for (const af of data) {
-        str += `<div class="avatar">
-                    <a href="#!"><img class="avatar-img rounded-circle"  src="avatarFriend" alt=""></a>
+        str += `<div class="hstack gap-2 mb-3" >
+                   <div class="avatar">
+                    <a href="#!"><img class="avatar-img rounded-circle"   src="${af.profile.avatarSrc}" alt=""></a>
                   </div>
                   <!-- Title -->
                   <div class="overflow-hidden">
-                    <a class="h6 mb-0" href="#!">${name} </a>
-                    <p class="mb-0 small text-truncate">job</p>
+                    <a class="h6 mb-0" href="#!">${af.profile.fullName} </a>
+                    <p class="mb-0 small text-truncate">${af.profile.job}</p>
                   </div>
                   <!-- Button -->
-                  <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" onclick="acceptFriend(<af className="user2 idUser"></af>)" href="#"><i class="fa-solid fa-plus"> </i></a>`
+                  <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" onclick="acceptFriend(${af.appUser2.idUser})" href="#"><i class="fa-solid fa-plus"> </i></a>
+
+                </div>`
+
     }
-    // document.getElementById("showAddFriend").innerHTML = str
+    str += `<div class="d-grid mt-3">
+                  <a class="btn btn-sm btn-primary-soft" href="#!">View more</a>
+                </div>`
+    document.getElementById("showAddFriend").innerHTML = str
+}
+
+function acceptFriend(user) {
+    $.ajax({
+        type: "GET", headers: {
+            'Accept': 'application/json', 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, data: {
+            user: user,
+        }, url: "http://localhost:8081/acceptFriend", //xử lý khi thành công
+        success: function (data) {
+        }, error: function (err) {
+            console.log(err)
+        }
+
+    })
+}
+
+function deleteAdd(user) {
+    $.ajax({
+        type: "GET", headers: {
+            'Accept': 'application/json', 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, data: {
+            user: user,
+        }, url: "http://localhost:8081/deleteAdd", //xử lý khi thành công
+        success: function (data) {
+        }, error: function (err) {
+            console.log(err)
+        }
+
+    })
 }
