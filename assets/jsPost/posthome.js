@@ -262,6 +262,8 @@ function showDateProfile(dataProfile) {
     document.getElementById("avatar3").src = dataProfile.avatarSrc;
     document.getElementById("avatar4").src = dataProfile.avatarSrc;
     document.getElementsByClassName("avatar5").src = dataProfile.avatarSrc;
+    document.getElementById("nameRight").innerHTML = dataProfile.fullName
+    document.getElementById("jobRight").innerHTML = dataProfile.job
     // document.getElementsByClassName("avatarCmt").src = dataProfile.avatarSrc;
 
 
@@ -495,6 +497,8 @@ function createCmt(idPost) {
             document.getElementById("cmtContent"+idPost).value = ""
             getComment(idPost);
             postHome()
+            getComment(idPost)
+
 
         }, error: function (err) {
             console.log("loi cmt")
