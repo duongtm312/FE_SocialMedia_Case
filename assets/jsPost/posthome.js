@@ -54,7 +54,7 @@ function show(data) {
                 <!-- Card feed action dropdown menu -->
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
                   <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-                  <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a></li>
+                  <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow ${p.profile.fullName} </a></li>
                   <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
                   <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
                   <li><hr class="dropdown-divider"></li>
@@ -100,50 +100,17 @@ function show(data) {
             <!-- Add comment -->
             <div class="d-flex mb-3">
               <!-- Avatar -->
-              <div class="avatar avatar-xs me-2">
-                <a href="#!"> <img class="avatar-img rounded-circle"  src="${srcava}" alt=""> </a>
-              </div>
+                <div class="avatar avatar-xs me-2">
+                 <a href="#!"> <img class="avatar-img rounded-circle"  src="${srcava}" alt=""> </a>
+               </div>
               <!-- Comment box  -->
-              <form class="w-100">
-                <textarea data-autoresize class="form-control pe-4 bg-light" rows="1" placeholder="Add a comment..."></textarea>
-              </form>
+             
+                <textarea data-autoresize class="form-control pe-4 bg-light" id="cmtContent${p.idPost}" rows="1" placeholder="Add a comment..."></textarea>
+             <a class="btn" onclick="createCmt(${p.idPost})"> Send</a>
             </div>
             <!-- Comment wrap START -->
             <ul class="comment-wrap list-unstyled" id="showComment${p.idPost}">
-<!--            -->
-<!--              &lt;!&ndash; Comment item START &ndash;&gt;-->
-<!--              <li class="comment-item">-->
-<!--                <div class="d-flex position-relative">-->
-<!--                  &lt;!&ndash; Avatar &ndash;&gt;-->
-<!--                  <div class="avatar avatar-xs">-->
-<!--                    <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt=""></a>-->
-<!--                  </div>-->
-<!--                  <div class="ms-2">-->
-<!--                    &lt;!&ndash; Comment by &ndash;&gt;-->
-<!--                    <div class="bg-light rounded-start-top-0 p-3 rounded">-->
-<!--                      <div class="d-flex justify-content-between">-->
-<!--                        <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>-->
-<!--                        <small class="ms-2">5hr</small>-->
-<!--                      </div>-->
-<!--                      <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; Comment react &ndash;&gt;-->
-<!--                    <ul class="nav nav-divider py-2 small">-->
-<!--                      <li class="nav-item">-->
-<!--                        <a class="nav-link" href="#!"> Like (3)</a>-->
-<!--                      </li>-->
-<!--                    </ul>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash; Comment item nested START &ndash;&gt;-->
-<!--                &lt;!&ndash; Load more replies &ndash;&gt;-->
-<!--                <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center mb-3 ms-5" data-bs-toggle="button" aria-pressed="true">-->
-<!--                </a>-->
-<!--                &lt;!&ndash; Comment item nested END &ndash;&gt;-->
-<!--              </li>-->
-<!--              &lt;!&ndash; Comment item END &ndash;&gt;-->
-<!--            </ul>-->
-            <!-- Comment wrap END -->
+
           </div>
           <!-- Card body END -->
           <!-- Card footer START -->
@@ -201,7 +168,7 @@ function showDateProfile(dataProfile) {
                     </div>
                     <!-- Info -->
                     <h5 class="mb-0"> <a href="#!">${dataProfile.fullName} </a> </h5>
-                    <small>C0322G1</small>
+                    <small>${dataProfile.job}</small>
                     <p class="mt-3">Bug nhiều chán qá rồi</p>
 
                     <!-- User stat START -->
@@ -382,7 +349,7 @@ function showComment(data, idPost) {
                     <!-- Comment react -->
                     <ul class="nav nav-divider py-2 small">
                       <li class="nav-item">
-                        <a class="nav-link" href="#!"> Like (${cmt.numLikeCmt})</a>
+                        <a class="nav-link" href="#!" on> Like (${cmt.numLikeCmt})</a>
                       </li>
                     </ul>
                   </div>
@@ -472,6 +439,7 @@ function showAddFriend(data) {
     document.getElementById("showAddFriend").innerHTML = str
 }
 
+// accept friend
 function acceptFriend(user) {
     $.ajax({
         type: "GET", headers: {
@@ -490,6 +458,7 @@ function acceptFriend(user) {
     })
 }
 
+// delete add friend
 function deleteAdd(user) {
     $.ajax({
         type: "GET", headers: {
@@ -504,5 +473,28 @@ function deleteAdd(user) {
             console.log(err)
         }
 
+    })
+}
+
+
+function createCmt(idPost) {
+    let contentCmt = $("#cmtContent" + idPost).val();
+    let comments = {
+        content: contentCmt,
+        idP: idPost,
+    }
+    $.ajax({
+        type: "POST", headers: {
+            'Accept': 'application/json', 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, url: "http://localhost:8081/home/createComment ", data: JSON.stringify(comments), //xử lý khi thành công
+        success: function (data) {
+            console.log("cmt thanh cong")
+
+        }, error: function (err) {
+            console.log("loi cmt")
+            console.log(err)
+        }
     })
 }
