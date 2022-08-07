@@ -503,7 +503,7 @@ function showAddFriend(data) {
                     <p class="mb-0 small text-truncate">job</p>
                   </div>
                   <!-- Button -->
-                  <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" onclick="acceptFriend(data.user2)" href="#"><i class="fa-solid fa-plus"> </i></a>`
+                  <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" onclick="acceptFriend(<af className="user2 idUser"></af>)" href="#"><i class="fa-solid fa-plus"> </i></a>`
     }
     // document.getElementById("showAddFriend").innerHTML = str
 }
