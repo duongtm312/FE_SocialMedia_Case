@@ -1,10 +1,10 @@
-
-
 let token = localStorage.getItem("token");
 postHome();
 showProfile()
+getAddFriend()
 
-function postHome (){
+// show post
+function postHome() {
     $.ajax({
         type: "GET",
         headers: {
@@ -15,7 +15,7 @@ function postHome (){
         },
         beforeSend: function (xhr) {
             console.log(token)
-            xhr.setRequestHeader ("Authorization", "Bearer " + token);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
         url: "http://localhost:8081/home/post",
         // data: JSON.stringify(),
@@ -34,6 +34,7 @@ function postHome (){
 
 function show(data) {
     console.log("show")
+    srcava = localStorage.getItem("avatardn")
     let str = "";
     for (const p of data) {
         str += `<div class="card-header border-0 pb-0">
@@ -41,7 +42,7 @@ function show(data) {
               <div class="d-flex align-items-center">
                 <!-- Avatar -->
                 <div class="avatar avatar-story me-2">
-                  <a href="#!"> <img class="avatar-img rounded-circle" src="${p.profile.avatarSrc}" alt=""> </a>
+                  <a href="1"> <img class="avatar-img rounded-circle" src="${p.profile.avatarSrc}" alt=""> </a>
                 </div>
                 <!-- Info -->
                 <div>
@@ -106,7 +107,7 @@ function show(data) {
             <div class="d-flex mb-3">
               <!-- Avatar -->
               <div class="avatar avatar-xs me-2">
-                <a href="#!"> <img class="avatar-img rounded-circle avatarHome" src="" alt=""> </a>
+                <a href="#!"> <img class="avatar-img rounded-circle"  src="${srcava}" alt=""> </a>
               </div>
               <!-- Comment box  -->
               <form class="w-100">
@@ -160,7 +161,9 @@ function show(data) {
     }
     document.getElementById("showhome").innerHTML = str;
 }
-function showProfile(){
+
+// show profile
+function showProfile() {
     $.ajax({
         type: "GET",
         headers: {
@@ -171,7 +174,7 @@ function showProfile(){
         },
         beforeSend: function (xhr) {
             console.log(token)
-            xhr.setRequestHeader ("Authorization", "Bearer " + token);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
         url: "http://localhost:8081/home/profile",
         // data: JSON.stringify(),
@@ -187,7 +190,8 @@ function showProfile(){
     })
 }
 
-function showDateProfile(dataProfile){
+function showDateProfile(dataProfile) {
+    localStorage.setItem("avatardn", dataProfile.avatarSrc)
     let str = `<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSideNavbar">
             <!-- Offcanvas header -->
             <div class="offcanvas-header">
@@ -296,10 +300,23 @@ function showDateProfile(dataProfile){
           </div>`
 
     document.getElementById("profile").innerHTML = str;
-    document.getElementById("avatarHome").src = dataProfile.avatarSrc;
+    document.getElementById("avatar1").src = dataProfile.avatarSrc;
+    document.getElementById("avatar2").src = dataProfile.avatarSrc;
+    document.getElementById("avatar3").src = dataProfile.avatarSrc;
+    document.getElementsByClassName("avatar5").src = dataProfile.avatarSrc;
+    // document.getElementsByClassName("avatarCmt").src = dataProfile.avatarSrc;
+
+    let data = document.querySelectorAll(".avatarCmt > img")
+    for (let i = 0; i < data.length; i++) {
+        let d = data[i]
+        d.src = dataProfile.avatarSrc;
+    }
+
+
 }
 
-function uploadFile () {
+// create post
+function uploadFile() {
     console.log("vào up file")
     let fileImg = document.getElementById("img").files;
     console.log(fileImg)
@@ -311,7 +328,7 @@ function uploadFile () {
         type: "POST",
         data: formData,
         beforeSend: function (xhr) {
-            xhr.setRequestHeader ("Authorization", "Bearer " + token);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
         url: "http://localhost:8081/home/upImg",
         success: function (data) {
@@ -320,6 +337,7 @@ function uploadFile () {
         }
     });
 }
+
 function createPost(data) {
     let contentPost = $("#stt").val();
     let post = {
@@ -333,7 +351,7 @@ function createPost(data) {
             'Content-Type': 'application/json'
         },
         beforeSend: function (xhr) {
-            xhr.setRequestHeader ("Authorization", "Bearer " + token);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
         url: "http://localhost:8081/home/createPost ",
         data: JSON.stringify(post),
@@ -347,6 +365,7 @@ function createPost(data) {
     })
 }
 
+// show comment
 function getComment(idPost) {
     $.ajax({
         type: "GET",
@@ -362,7 +381,7 @@ function getComment(idPost) {
         success: function (data) {
             console.log(data)
             console.log(idPost)
-            showComment(data,idPost)
+            showComment(data, idPost)
             console.log("comment")
 
         },
@@ -373,7 +392,7 @@ function getComment(idPost) {
     })
 }
 
-function showComment(data,idPost) {
+function showComment(data, idPost) {
     let str = "";
     for (const cmt of data) {
         str += `
@@ -412,6 +431,8 @@ function showComment(data,idPost) {
     let id = "showComment" + idPost;
     document.getElementById(id).innerHTML = str;
 }
+
+// create like
 function createLike(id) {
     // let like = {
     //     post: {
@@ -427,7 +448,7 @@ function createLike(id) {
 
         },
         beforeSend: function (xhr) {
-            xhr.setRequestHeader ("Authorization", "Bearer " + token);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
         },
         // data: JSON.stringify(),
 
@@ -441,4 +462,48 @@ function createLike(id) {
             console.log(err)
         }
     })
+}
+
+// show add friend
+
+function getAddFriend() {
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            // 'Content-Type': 'application/json'
+        },
+        beforeSend: function (xhr) {
+            console.log(token)
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
+        url: "http://localhost:8081/home/showaddfriend",
+        // data: JSON.stringify(),
+        //xử lý khi thành công
+        success: function (data) {
+            console.log("thành công show add friend")
+            console.log(data)
+            showAddFriend(data)
+        },
+        error: function (err) {
+            console.log("lỗi")
+        }
+    })
+}
+
+function showAddFriend(data) {
+    let str = ""
+    for (const af of data) {
+        str += `<div class="avatar">
+                    <a href="#!"><img class="avatar-img rounded-circle"  src="avatarFriend" alt=""></a>
+                  </div>
+                  <!-- Title -->
+                  <div class="overflow-hidden">
+                    <a class="h6 mb-0" href="#!">${name} </a>
+                    <p class="mb-0 small text-truncate">job</p>
+                  </div>
+                  <!-- Button -->
+                  <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" onclick="acceptFriend(data.user2)" href="#"><i class="fa-solid fa-plus"> </i></a>`
+    }
+    // document.getElementById("showAddFriend").innerHTML = str
 }
