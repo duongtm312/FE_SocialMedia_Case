@@ -197,7 +197,7 @@ function onMessageReceived(payload) {
                       <div class="w-100">
                         <div class="d-flex flex-column align-items-start">
                           <div class="bg-light text-secondary p-2 px-3 rounded-2">${message.contentMessage}</div>
-                          <div class="small my-2">${message.time}</div>
+                          <span class="small my-2 timeAGO" >${message.time}</span>
                         </div>
                       </div>
                     </div>
@@ -211,12 +211,20 @@ function onMessageReceived(payload) {
                       <div class="d-flex flex-column align-items-end">
                         <div class="bg-primary text-white p-2 px-3 rounded-2">${message.contentMessage}</div>
                         <div class="d-flex my-2">
-                          <div class="small text-secondary">${message.time}</div>
+                          <span class="small text-secondary timeAGO">${message.time}</span>
                           <div class="small ms-2"><i class="fa-solid fa-check-double text-info"></i></div>
                         </div>
                       </div>
                     </div>
                   </div>`
         showMessage.innerHTML+=str
+    }
+}
+window.onload = function () {
+    let dates = document.querySelectorAll(".timeAGO > span")
+    for (let i = 0; i < dates.length; i++) {
+        let d = dates[i]
+        d.innerHTML = moment(d.innerHTML).fromNow()
+
     }
 }
