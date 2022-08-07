@@ -482,6 +482,7 @@ function acceptFriend(user) {
             user: user,
         }, url: "http://localhost:8081/acceptFriend", //xử lý khi thành công
         success: function (data) {
+            getAddFriend()
         }, error: function (err) {
             console.log(err)
         }
