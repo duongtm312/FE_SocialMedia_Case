@@ -371,11 +371,6 @@ function showComment(data, idPost) {
 
 // create like
 function createLike(id) {
-    // let like = {
-    //     post: {
-    //         id: id
-    //     }
-
     token = localStorage.getItem("token")
     $.ajax({
         type: "POST", headers: {

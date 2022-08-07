@@ -70,10 +70,10 @@ function showPostUser(data) {
                        
                         <ul class="nav nav-stack py-3 small">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#!"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Liked (${p.numLikePost})</a>
+                                <a class="nav-link active" href="#!" onclick="createLikee(${p.idPost})"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Liked (${p.numLikePost})</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comments (${p.numCommentPost})</a>
+                                <a class="nav-link" href="#!" onclick="getCommentt(${p.idPost})"> <i class="bi bi-chat-fill pe-1"></i>Comments (${p.numCommentPost})</a>
                             </li>
                             <!-- Card share action START -->
                             <li class="nav-item dropdown ms-sm-auto">
@@ -101,42 +101,15 @@ function showPostUser(data) {
                                 <a href="#!"> <img class="avatar-img rounded-circle" src="${p.profile.avatarSrc}" alt=""> </a>
                             </div>
                             <!-- Comment box  -->
-                            <form class="position-relative w-100">
-                                <textarea class="form-control pe-4 bg-light" rows="1" placeholder="Add a comment..."></textarea>
-                            </form>
+                            
+                                <textarea class="form-control pe-4 bg-light" rows="1" id="cmtContentt${p.idPost}" placeholder="Add a comment..."></textarea>
+                                <a class="btn" onclick="createCmtt(${p.idPost})"> Send</a>
+                            
                         </div>
                         <!-- Comment wrap START -->
-                        <ul class="comment-wrap list-unstyled">
+                        <ul class="comment-wrap list-unstyled" id="cmtProfile${p.idPost}">
                             <!-- Comment item START -->
-                            <li class="comment-item">
-                                <div class="d-flex position-relative">
-                                    <!-- Avatar -->
-                                    <div class="avatar avatar-xs">
-                                        <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt=""></a>
-                                    </div>
-                                    <div class="ms-2">
-                                        <!-- Comment by -->
-                                        <div class="bg-light rounded-start-top-0 p-3 rounded">
-                                            <div class="d-flex justify-content-between">
-                                                <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
-                                                <small class="ms-2">5hr</small>
-                                            </div>
-                                            <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
-                                        </div>
-                                        <!-- Comment react -->
-                                        <ul class="nav nav-divider py-2 small">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#!"> Like (3)</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Comment item nested START -->
-                                <ul class="comment-item-nested list-unstyled">
-                                    <!-- Comment item START -->
- 
-                                            <div class="ms-2">
-                                    </li>
+                            
                                     <!-- Comment item END -->
                                 </ul>
                             </li>
@@ -153,18 +126,66 @@ function showPostUser(data) {
     }
     document.getElementById("showPostUser").innerHTML = str;
 }
-function changeProfile (data){
+
+function changeProfile(data) {
     console.log(data)
-document.getElementById("avatar11").src = data[0].profile.avatarSrc
-document.getElementById("avatar12").src = data[0].profile.avatarSrc
-document.getElementById("avatar13").src = data[0].profile.avatarSrc
-document.getElementById("avatar14").src = data[0].profile.avatarSrc
-document.getElementById("avatar15").src = data[0].profile.avatarSrc
-document.getElementById("name1").innerHTML = data[0].profile.fullName
-document.getElementById("name2").innerHTML = data[0].profile.fullName
-document.getElementById("job1").innerHTML = data[0].profile.job
-document.getElementById("job2").innerHTML = data[0].profile.job
-document.getElementById("address1").innerHTML = data[0].profile.address
-document.getElementById("start").innerHTML = data[0].profile.startJoin
-document.getElementById("cover").style.background.url = data[0].profile.photoCoverSrc
+    document.getElementById("avatar11").src = data[0].profile.avatarSrc
+    document.getElementById("avatar12").src = data[0].profile.avatarSrc
+    document.getElementById("avatar13").src = data[0].profile.avatarSrc
+    document.getElementById("avatar14").src = data[0].profile.avatarSrc
+    document.getElementById("avatar15").src = data[0].profile.avatarSrc
+    document.getElementById("name1").innerHTML = data[0].profile.fullName
+    document.getElementById("name2").innerHTML = data[0].profile.fullName
+    document.getElementById("job1").innerHTML = data[0].profile.job
+    document.getElementById("job2").innerHTML = data[0].profile.job
+    document.getElementById("address1").innerHTML = data[0].profile.address
+    document.getElementById("start").innerHTML = data[0].profile.startJoin
+    document.getElementById("cover").style.background.url = data[0].profile.photoCoverSrc
 }
+
+function createCmtt(idPost) {
+    let contentCmt = $("#cmtContentt" + idPost).val();
+    console.log(contentCmt)
+    let token = localStorage.getItem("token");
+    let comments = {
+        content: contentCmt,
+        idP: idPost,
+    }
+    $.ajax({
+        type: "POST", headers: {
+            'Accept': 'application/json', 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, url: "http://localhost:8081/home/createComment ", data: JSON.stringify(comments),
+        success: function (data) {
+            console.log("cmt thanh cong")
+            document.getElementById("cmtContentt" + idPost).value = ""
+            getPost()
+        }, error: function (err) {
+            console.log("loi cmt")
+            console.log(err)
+        }
+    })
+}
+
+function createLikee(id) {
+    token = localStorage.getItem("token")
+    $.ajax({
+        type: "POST", headers: {
+            // 'Accept': 'application/json',
+            'Content-Type': 'application/json'
+
+        }, beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, // data: JSON.stringify(),
+
+        url: "http://localhost:8081/like/" + id, success: function () {
+            console.log("thanh cong ")
+        }, error: function (err) {
+            console.log("loi")
+            getPost()
+            console.log(err)
+        }
+    })
+}
+
