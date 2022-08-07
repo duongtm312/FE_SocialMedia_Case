@@ -266,14 +266,10 @@ function showDateProfile(dataProfile) {
     document.getElementById("avatar1").src = dataProfile.avatarSrc;
     document.getElementById("avatar2").src = dataProfile.avatarSrc;
     document.getElementById("avatar3").src = dataProfile.avatarSrc;
+    document.getElementById("avatar4").src = dataProfile.avatarSrc;
     document.getElementsByClassName("avatar5").src = dataProfile.avatarSrc;
     // document.getElementsByClassName("avatarCmt").src = dataProfile.avatarSrc;
 
-    let data = document.querySelectorAll(".avatarCmt > img")
-    for (let i = 0; i < data.length; i++) {
-        let d = data[i]
-        d.src = dataProfile.avatarSrc;
-    }
 
 
 }
@@ -307,7 +303,9 @@ function createPost(data) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         }, url: "http://localhost:8081/home/createPost ", data: JSON.stringify(post), //xử lý khi thành công
         success: function (data) {
-
+            document.getElementById("stt").value =""
+            document.getElementById("img").value = ""
+            postHome()
         }, error: function (err) {
             console.log(err)
         }
@@ -335,13 +333,9 @@ function getComment(idPost) {
     })
 }
 
-window.onload = function () {
-    let dates = document.querySelectorAll(".nav-divider > span")
-    for (let i = 0; i < dates.length; i++) {
-        let d = dates[i]
-        d.innerHTML = moment(d.innerHTML).fromNow()
-    }
-}
+
+
+
 function showComment(data, idPost) {
     let str = "";
     for (const cmt of data) {
@@ -494,6 +488,7 @@ function deleteAdd(user) {
 
 function createCmt(idPost) {
     let contentCmt = $("#cmtContent" + idPost).val();
+
     let comments = {
         content: contentCmt,
         idP: idPost,
@@ -506,6 +501,9 @@ function createCmt(idPost) {
         }, url: "http://localhost:8081/home/createComment ", data: JSON.stringify(comments), //xử lý khi thành công
         success: function (data) {
             console.log("cmt thanh cong")
+            document.getElementById("cmtContent"+idPost).value = ""
+            getComment(idPost);
+            postHome()
 
         }, error: function (err) {
             console.log("loi cmt")
@@ -513,3 +511,4 @@ function createCmt(idPost) {
         }
     })
 }
+
