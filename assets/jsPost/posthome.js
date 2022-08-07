@@ -31,6 +31,14 @@ function postHome (){
         }
     })
 }
+window.onload = function () {
+    let dates = document.querySelectorAll(".nav-divider > span")
+    for (let i = 0; i < dates.length; i++) {
+        let d = dates[i]
+        d.innerHTML = moment(d.innerHTML).fromNow()
+
+    }
+}
 
 function show(data) {
     console.log("show")
@@ -442,3 +450,4 @@ function createLike(id) {
         }
     })
 }
+
