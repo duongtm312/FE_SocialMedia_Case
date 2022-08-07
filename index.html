@@ -29,7 +29,7 @@
 
   <!-- Theme CSS -->
   <link id="style-switch" rel="stylesheet" type="text/css" href="assets/css/style.css">
-  
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GMKQ4P9YMZ"></script>
@@ -182,7 +182,7 @@ Header START -->
 
         <li class="nav-item ms-2 dropdown">
 					<a class="nav-link btn icon-md p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
-						<img class="avatar-img rounded-2 avatarHome" src="" alt="">
+						<img class="avatar-img rounded-2 " id="avatar2" src="" alt="">
 					</a>
           <ul class="dropdown-menu dropdown-animation dropdown-menu-end pt-3 small me-md-n3" aria-labelledby="profileDropdown">
             <!-- Profile info -->
@@ -190,7 +190,7 @@ Header START -->
               <div class="d-flex align-items-center position-relative">
                 <!-- Avatar -->
                 <div class="avatar me-3">
-                  <img class="avatar-img rounded-circle avatarHome" src="" alt="avatar">
+                  <img class="avatar-img rounded-circle" id="avatar3" src="" alt="avatar">
                 </div>
                 <div>
                   <a class="h6 stretched-link" href="#">Lori Ferguson</a>
@@ -239,7 +239,7 @@ Header END -->
 
 <!-- **************** MAIN CONTENT START **************** -->
 <main>
-  
+
   <!-- Container START -->
   <div class="container">
     <div class="row g-4">
@@ -255,7 +255,7 @@ Header END -->
           </button>
         </div>
         <!-- Advanced filter responsive toggler END -->
-        
+
         <!-- Navbar START-->
         <nav class="navbar navbar-expand-lg mx-0" id="profile">
 
@@ -360,7 +360,7 @@ Header END -->
           <div class="d-flex mb-3">
             <!-- Avatar -->
             <div class="avatar avatar-xs me-2">
-              <a href="#"> <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt=""> </a>
+              <a href="#"> <img class="avatar-img rounded-circle" id="avatar1" src="assets/images/avatar/03.jpg" alt=""> </a>
             </div>
             <!-- Post input -->
             <form class="w-100">
@@ -425,33 +425,23 @@ Header END -->
             <div class="card">
               <!-- Card header START -->
               <div class="card-header pb-0 border-0">
-                <h5 class="card-title mb-0">Friend</h5>
+                <h5 class="card-title mb-0">Add Friend</h5>
               </div>
               <!-- Card header END -->
               <!-- Card body START -->
-              <div class="card-body">
+              <div class="card-body" id="showAddFriend">
                 <!-- Connection item START -->
-                <div class="hstack gap-2 mb-3">
-                  <!-- Avatar -->
-                  <div class="avatar">
-                    <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt=""></a>
-                  </div>
-                  <!-- Title -->
-                  <div class="overflow-hidden">
-                    <a class="h6 mb-0" href="#!">Judy Nguyen </a>
-                    <p class="mb-0 small text-truncate">News anchor</p>
-                  </div>
-                  <!-- Button -->
-                  <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
-                </div>
                 <!-- Connection item END -->
 
 
                 <!-- View more button -->
-                <div class="d-grid mt-3">
-                  <a class="btn btn-sm btn-primary-soft" href="#!">View more</a>
+
                 </div>
+
+
+
               </div>
+
               <!-- Card body END -->
             </div>
           </div>
@@ -533,7 +523,7 @@ Header END -->
          <div class="d-flex mb-3">
           <!-- Avatar -->
           <div class="avatar avatar-xs me-2">
-            <img class="avatar-img rounded-circle avatarHome"   src="" alt="">
+            <img class="avatar-img rounded-circle "   src="" alt="">
           </div>
           <!-- Feed box  -->
           <form class="w-100">

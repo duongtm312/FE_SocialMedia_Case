@@ -1,32 +1,26 @@
-
-
 let token = localStorage.getItem("token");
 postHome();
 showProfile()
+getAddFriend()
 
-function postHome (){
+// show post
+function postHome() {
     $.ajax({
-        type: "GET",
-        headers: {
+        type: "GET", headers: {
             //kiểu dữ liệu nhận về
-            'Accept': 'application/json',
-            // kiểu truyền đi
+            'Accept': 'application/json', // kiểu truyền đi
             // 'Content-Type': 'application/json'
-        },
-        beforeSend: function (xhr) {
+        }, beforeSend: function (xhr) {
             console.log(token)
-            xhr.setRequestHeader ("Authorization", "Bearer " + token);
-        },
-        url: "http://localhost:8081/home/post",
-        // data: JSON.stringify(),
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, url: "http://localhost:8081/home/post", // data: JSON.stringify(),
         //xử lý khi thành công
         success: function (data) {
             console.log("thành công")
             console.log(data)
             // showProfile()
             show(data);
-        },
-        error: function (err) {
+        }, error: function (err) {
             console.log("lỗi")
         }
     })
@@ -34,6 +28,7 @@ function postHome (){
 
 function show(data) {
     console.log("show")
+    srcava = localStorage.getItem("avatardn")
     let str = "";
     for (const p of data) {
         str += `<div class="card-header border-0 pb-0">
@@ -41,7 +36,7 @@ function show(data) {
               <div class="d-flex align-items-center">
                 <!-- Avatar -->
                 <div class="avatar avatar-story me-2">
-                  <a href="#!"> <img class="avatar-img rounded-circle" src="${p.profile.avatarSrc}" alt=""> </a>
+                  <a href="1"> <img class="avatar-img rounded-circle" src="${p.profile.avatarSrc}" alt=""> </a>
                 </div>
                 <!-- Info -->
                 <div>
@@ -106,7 +101,7 @@ function show(data) {
             <div class="d-flex mb-3">
               <!-- Avatar -->
               <div class="avatar avatar-xs me-2">
-                <a href="#!"> <img class="avatar-img rounded-circle avatarHome" src="" alt=""> </a>
+                <a href="#!"> <img class="avatar-img rounded-circle"  src="${srcava}" alt=""> </a>
               </div>
               <!-- Comment box  -->
               <form class="w-100">
@@ -160,34 +155,31 @@ function show(data) {
     }
     document.getElementById("showhome").innerHTML = str;
 }
-function showProfile(){
+
+// show profile
+function showProfile() {
     $.ajax({
-        type: "GET",
-        headers: {
+        type: "GET", headers: {
             //kiểu dữ liệu nhận về
-            'Accept': 'application/json',
-            // kiểu truyền đi
+            'Accept': 'application/json', // kiểu truyền đi
             // 'Content-Type': 'application/json'
-        },
-        beforeSend: function (xhr) {
+        }, beforeSend: function (xhr) {
             console.log(token)
-            xhr.setRequestHeader ("Authorization", "Bearer " + token);
-        },
-        url: "http://localhost:8081/home/profile",
-        // data: JSON.stringify(),
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, url: "http://localhost:8081/home/profile", // data: JSON.stringify(),
         //xử lý khi thành công
         success: function (dataProfile) {
             console.log("thành công")
             console.log(dataProfile)
             showDateProfile(dataProfile);
-        },
-        error: function (err) {
+        }, error: function (err) {
             console.log("lỗi")
         }
     })
 }
 
-function showDateProfile(dataProfile){
+function showDateProfile(dataProfile) {
+    localStorage.setItem("avatardn", dataProfile.avatarSrc)
     let str = `<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSideNavbar">
             <!-- Offcanvas header -->
             <div class="offcanvas-header">
@@ -296,84 +288,79 @@ function showDateProfile(dataProfile){
           </div>`
 
     document.getElementById("profile").innerHTML = str;
-    document.getElementById("avatarHome").src = dataProfile.avatarSrc;
+    document.getElementById("avatar1").src = dataProfile.avatarSrc;
+    document.getElementById("avatar2").src = dataProfile.avatarSrc;
+    document.getElementById("avatar3").src = dataProfile.avatarSrc;
+    document.getElementsByClassName("avatar5").src = dataProfile.avatarSrc;
+    // document.getElementsByClassName("avatarCmt").src = dataProfile.avatarSrc;
+
+    let data = document.querySelectorAll(".avatarCmt > img")
+    for (let i = 0; i < data.length; i++) {
+        let d = data[i]
+        d.src = dataProfile.avatarSrc;
+    }
+
+
 }
 
-function uploadFile () {
+// create post
+function uploadFile() {
     console.log("vào up file")
     let fileImg = document.getElementById("img").files;
     console.log(fileImg)
     let formData = new FormData();
     formData.append("file", fileImg[0]);
     $.ajax({
-        contentType: false,
-        processData: false,
-        type: "POST",
-        data: formData,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader ("Authorization", "Bearer " + token);
-        },
-        url: "http://localhost:8081/home/upImg",
-        success: function (data) {
+        contentType: false, processData: false, type: "POST", data: formData, beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, url: "http://localhost:8081/home/upImg", success: function (data) {
             console.log(data)
             createPost(data);
         }
     });
 }
+
 function createPost(data) {
     let contentPost = $("#stt").val();
     let post = {
-        contentPost: contentPost,
-        photoPostSrc: data,
+        contentPost: contentPost, photoPostSrc: data,
     }
     $.ajax({
-        type: "POST",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader ("Authorization", "Bearer " + token);
-        },
-        url: "http://localhost:8081/home/createPost ",
-        data: JSON.stringify(post),
-        //xử lý khi thành công
+        type: "POST", headers: {
+            'Accept': 'application/json', 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, url: "http://localhost:8081/home/createPost ", data: JSON.stringify(post), //xử lý khi thành công
         success: function (data) {
 
-        },
-        error: function (err) {
+        }, error: function (err) {
             console.log(err)
         }
     })
 }
 
+// show comment
 function getComment(idPost) {
     $.ajax({
-        type: "GET",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        beforeSend: function (xhr) {
+        type: "GET", headers: {
+            'Accept': 'application/json', 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
-        },
-        url: "http://localhost:8081/home/comment/" + idPost,
-        //xử lý khi thành công
+        }, url: "http://localhost:8081/home/comment/" + idPost, //xử lý khi thành công
         success: function (data) {
             console.log(data)
             console.log(idPost)
-            showComment(data,idPost)
+            showComment(data, idPost)
             console.log("comment")
 
-        },
-        error: function (err) {
+        }, error: function (err) {
             console.log("loi")
             console.log(err)
         }
     })
 }
 
-function showComment(data,idPost) {
+function showComment(data, idPost) {
     let str = "";
     for (const cmt of data) {
         str += `
@@ -412,6 +399,8 @@ function showComment(data,idPost) {
     let id = "showComment" + idPost;
     document.getElementById(id).innerHTML = str;
 }
+
+// create like
 function createLike(id) {
     // let like = {
     //     post: {
@@ -420,25 +409,99 @@ function createLike(id) {
 
     token = localStorage.getItem("token")
     $.ajax({
-        type: "POST",
-        headers: {
+        type: "POST", headers: {
             // 'Accept': 'application/json',
             'Content-Type': 'application/json'
 
-        },
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader ("Authorization", "Bearer " + token);
-        },
-        // data: JSON.stringify(),
+        }, beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, // data: JSON.stringify(),
 
-        url: "http://localhost:8081/like/" + id,
-        success: function () {
+        url: "http://localhost:8081/like/" + id, success: function () {
             console.log("thanh cong ")
-        },
-        error: function (err) {
+        }, error: function (err) {
             console.log("loi")
             postHome()
             console.log(err)
         }
+    })
+}
+
+// show add friend
+
+function getAddFriend() {
+    $.ajax({
+        type: "GET", headers: {
+            'Accept': 'application/json', // 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
+            console.log(token)
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, url: "http://localhost:8081/home/showaddfriend", // data: JSON.stringify(),
+        //xử lý khi thành công
+        success: function (data) {
+            console.log("thành công show add friend")
+            console.log(data)
+            showAddFriend(data)
+        }, error: function (err) {
+            console.log("lỗi")
+        }
+    })
+}
+
+function showAddFriend(data) {
+    let str = ""
+    for (const af of data) {
+        str += `<div class="hstack gap-2 mb-3" >
+                   <div class="avatar">
+                    <a href="#!"><img class="avatar-img rounded-circle"   src="${af.profile.avatarSrc}" alt=""></a>
+                  </div>
+                  <!-- Title -->
+                  <div class="overflow-hidden">
+                    <a class="h6 mb-0" href="#!">${af.profile.fullName} </a>
+                    <p class="mb-0 small text-truncate">${af.profile.job}</p>
+                  </div>
+                  <!-- Button -->
+                  <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" onclick="acceptFriend(${af.appUser2.idUser})" href="#"><i class="fa-solid fa-plus"> </i></a>
+
+                </div>`
+
+    }
+    str += `<div class="d-grid mt-3">
+                  <a class="btn btn-sm btn-primary-soft" href="#!">View more</a>
+                </div>`
+    document.getElementById("showAddFriend").innerHTML = str
+}
+
+function acceptFriend(user) {
+    $.ajax({
+        type: "GET", headers: {
+            'Accept': 'application/json', 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, data: {
+            user: user,
+        }, url: "http://localhost:8081/acceptFriend", //xử lý khi thành công
+        success: function (data) {
+        }, error: function (err) {
+            console.log(err)
+        }
+
+    })
+}
+
+function deleteAdd(user) {
+    $.ajax({
+        type: "GET", headers: {
+            'Accept': 'application/json', 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, data: {
+            user: user,
+        }, url: "http://localhost:8081/deleteAdd", //xử lý khi thành công
+        success: function (data) {
+        }, error: function (err) {
+            console.log(err)
+        }
+
     })
 }
