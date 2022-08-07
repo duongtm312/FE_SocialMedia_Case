@@ -299,6 +299,7 @@ function createPost(data) {
         success: function (data) {
             document.getElementById("stt").value =""
             document.getElementById("img").value = ""
+            postHome()
         }, error: function (err) {
             console.log(err)
         }
