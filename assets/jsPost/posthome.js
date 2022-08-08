@@ -165,7 +165,7 @@ function showDateProfile(dataProfile) {
               <!-- Card START -->
               <div class="card overflow-hidden">
                 <!-- Cover image -->
-                <div class="h-50px" style="background-image:url(${dataProfile.photoCoverSrc}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+                <div class="h-50px" style="background-image:url(); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
                   <!-- Card body START -->
                   <div class="card-body pt-0">
                     <div class="text-center">

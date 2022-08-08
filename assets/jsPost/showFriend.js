@@ -55,7 +55,7 @@ function showProFriend(profile) {
     document.getElementById("job2").innerHTML = profile.job
     document.getElementById("address1").innerHTML = profile.address
     document.getElementById("start").innerHTML = profile.startJoin
-    document.getElementById("cover").style.backgroundImage = "url(" +profile.photoCoverSrc + ")"
+    document.getElementById("cover").src = profile.photoCoverSrc
 }
 function getPost() {
     $.ajax({

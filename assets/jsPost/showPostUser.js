@@ -158,7 +158,7 @@ function changeProfile(data) {
     document.getElementById("address1").innerHTML = data.address
     document.getElementById("start").innerHTML = data.startJoin
     console.log(data.photoCoverSrc)
-    document.getElementById("cover").style.backgroundImage = "url(" +data.photoCoverSrc + ")"
+    document.getElementById("cover").src = data.photoCoverSrc
 }
 
 function createCmtt(idPost) {
