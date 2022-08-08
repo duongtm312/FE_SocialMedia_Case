@@ -154,7 +154,6 @@ function showPostUser(data) {
     document.getElementById("showPostUser").innerHTML = str;
 }
 
-
 function getProfile() {
     let token = localStorage.getItem("token");
     $.ajax({
