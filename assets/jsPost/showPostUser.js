@@ -1,5 +1,5 @@
 getPost();
-
+getProfile()
 function getPost() {
     let token = localStorage.getItem("token");
     $.ajax({
@@ -14,7 +14,7 @@ function getPost() {
         url: "http://localhost:8081/home/postUser",
         success: function (data) {
             showPostUser(data)
-            changeProfile(data)
+
 
         },
         error: function (err) {
@@ -154,20 +154,41 @@ function showPostUser(data) {
     document.getElementById("showPostUser").innerHTML = str;
 }
 
+
+function getProfile() {
+    let token = localStorage.getItem("token");
+    $.ajax({
+        type: "GET", headers: {
+            //kiểu dữ liệu nhận về
+            'Accept': 'application/json', // kiểu truyền đi
+            // 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
+            console.log(token)
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, url: "http://localhost:8081/home/profile", // data: JSON.stringify(),
+        //xử lý khi thành công
+        success: function (data) {
+
+            changeProfile(data);
+        }, error: function (err) {
+            console.log("lỗi")
+        }
+    })
+}
 function changeProfile(data) {
     console.log(data)
-    document.getElementById("avatar11").src = data[0].profile.avatarSrc
-    document.getElementById("avatar12").src = data[0].profile.avatarSrc
-    document.getElementById("avatar13").src = data[0].profile.avatarSrc
-    document.getElementById("avatar14").src = data[0].profile.avatarSrc
-    document.getElementById("avatar15").src = data[0].profile.avatarSrc
-    document.getElementById("name1").innerHTML = data[0].profile.fullName
-    document.getElementById("name2").innerHTML = data[0].profile.fullName
-    document.getElementById("job1").innerHTML = data[0].profile.job
-    document.getElementById("job2").innerHTML = data[0].profile.job
-    document.getElementById("address1").innerHTML = data[0].profile.address
-    document.getElementById("start").innerHTML = data[0].profile.startJoin
-    document.getElementById("cover").style.background.url = data[0].profile.photoCoverSrc
+    document.getElementById("avatar11").src = data.avatarSrc
+    document.getElementById("avatar12").src = data.avatarSrc
+    document.getElementById("avatar13").src = data.avatarSrc
+    document.getElementById("avatar14").src = data.avatarSrc
+    document.getElementById("avatar15").src = data.avatarSrc
+    document.getElementById("name1").innerHTML = data.fullName
+    document.getElementById("name2").innerHTML = data.fullName
+    document.getElementById("job1").innerHTML = data.job
+    document.getElementById("job2").innerHTML = data.job
+    document.getElementById("address1").innerHTML = data.address
+    document.getElementById("start").innerHTML = data.startJoin
+    document.getElementById("cover").style.background.url = data.photoCoverSrc
 }
 
 function createCmtt(idPost) {
