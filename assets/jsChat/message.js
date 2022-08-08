@@ -39,4 +39,29 @@ function showFriend(data){
     }
     showFriendChat.innerHTML=str
 }
+function showProfile() {
+    $.ajax({
+        type: "GET", headers: {
+            //kiểu dữ liệu nhận về
+            'Accept': 'application/json', // kiểu truyền đi
+            // 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
+            console.log(token)
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, url: "http://localhost:8081/home/profile", // data: JSON.stringify(),
+        //xử lý khi thành công
+        success: function (profile) {
+            showPro(profile)
+        }, error: function (err) {
+        }
+    })
+}
+
+function showPro(profile) {
+    document.getElementById("avatar11").src = profile.avatarSrc
+    document.getElementById("avatar12").src = profile.avatarSrc
+    document.getElementById("name1").innerHTML = profile.fullName
+    document.getElementById("job1").innerHTML = profile.job
+}
+window.onload(showProfile())
 window.onload(show())
