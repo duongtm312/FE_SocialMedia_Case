@@ -1,7 +1,8 @@
-    let searchFriends= document.getElementById("searchFriends")
+let searchFriends = document.getElementById("searchFriends")
 let token = localStorage.getItem("token");
-function searchFriend(){
-let  name = document.getElementById("searchInput").value
+
+function searchFriend() {
+    let name = document.getElementById("searchInput").value
     $.ajax({
         type: "GET",
         headers: {
@@ -24,10 +25,11 @@ let  name = document.getElementById("searchInput").value
         }
     })
 }
-function showSearchFriend(proFile){
-    let str=""
+
+function showSearchFriend(proFile) {
+    let str = ""
     for (const p of proFile) {
-        str+=`  <li id="'${p.appUser.userName}'">
+        str += `  <li id="'${p.appUser.userName}'">
                 <div class="rounded badge-unread d-sm-flex border-0 mb-1 p-3 position-relative">
                   <!-- Avatar -->
                   <div class="avatar text-center">
@@ -45,11 +47,11 @@ function showSearchFriend(proFile){
                
               </li>`
     }
-    searchFriends.innerHTML=str
+    searchFriends.innerHTML = str
 }
 
 
-function addFriend(user){
+function addFriend(user) {
 
     $.ajax({
         type: "GET",
@@ -66,6 +68,13 @@ function addFriend(user){
         url: "http://localhost:8081/addFriend",
         //xử lý khi thành công
         success: function (data) {
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Add Friend Success',
+                showConfirmButton: false,
+                timer: 1500
+            })
         },
         error: function (err) {
             console.log(err)
@@ -73,3 +82,29 @@ function addFriend(user){
 
     })
 }
+
+function showProfile() {
+    $.ajax({
+        type: "GET", headers: {
+            //kiểu dữ liệu nhận về
+            'Accept': 'application/json', // kiểu truyền đi
+            // 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
+            console.log(token)
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, url: "http://localhost:8081/home/profile", // data: JSON.stringify(),
+        //xử lý khi thành công
+        success: function (profile) {
+            showPro(profile)
+        }, error: function (err) {
+        }
+    })
+}
+
+function showPro(profile) {
+    document.getElementById("avatar11").src = profile.avatarSrc
+    document.getElementById("avatar12").src = profile.avatarSrc
+    document.getElementById("name1").innerHTML = profile.fullName
+    document.getElementById("job1").innerHTML = profile.job
+}
+window.onload(showProfile())

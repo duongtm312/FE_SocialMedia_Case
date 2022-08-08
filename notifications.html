@@ -23,6 +23,7 @@
 	<!-- Theme CSS -->
 	<link id="style-switch" rel="stylesheet" type="text/css" href="assets/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -160,7 +161,7 @@ Header START -->
 
         <li class="nav-item ms-2 dropdown">
 					<a class="nav-link btn icon-md p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
-						<img class="avatar-img rounded-2" src="assets/images/avatar/07.jpg" alt="">
+						<img class="avatar-img rounded-2" src="" id="avatar12" alt="">
 					</a>
           <ul class="dropdown-menu dropdown-animation dropdown-menu-end pt-3 small me-md-n3" aria-labelledby="profileDropdown">
             <!-- Profile info -->
@@ -168,11 +169,11 @@ Header START -->
               <div class="d-flex align-items-center position-relative">
                 <!-- Avatar -->
                 <div class="avatar me-3">
-                  <img class="avatar-img rounded-circle" src="assets/images/avatar/07.jpg" alt="avatar">
+                  <img class="avatar-img rounded-circle" id="avatar11" src="" alt="avatar">
                 </div>
                 <div>
-                  <a class="h6 stretched-link" href="#">Lori Ferguson</a>
-                  <p class="small m-0">Web Developer</p>
+                  <a class="h6 stretched-link" href="#" id="name1"></a>
+                  <p class="small m-0" id="job1"></p>
                 </div>
               </div>
               <a class="dropdown-item btn btn-primary-soft btn-sm my-2 text-center" href="my-profile.html">View profile</a>

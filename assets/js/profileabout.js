@@ -15,6 +15,7 @@ function getEditAbout() {
         success: function (data) {
             console.log(data)
             showEditAbout(data);
+            changeProfile(data)
         },
         error: function (err) {
             console.log(err)
@@ -173,4 +174,16 @@ function showEditAbout(data){
                                 </div>`
 
     document.getElementById("showProfile").innerHTML = str
+}
+function changeProfile(data) {
+    document.getElementById("avatar11").src = data.avatarSrc
+    document.getElementById("avatar12").src = data.avatarSrc
+    document.getElementById("avatar13").src = data.avatarSrc
+    document.getElementById("name1").innerHTML = data.fullName
+    document.getElementById("name2").innerHTML = data.fullName
+    document.getElementById("job1").innerHTML = data.job
+    document.getElementById("job2").innerHTML = data.job
+    document.getElementById("address1").innerHTML = data.address
+    document.getElementById("start").innerHTML = data.startJoin
+    document.getElementById("cover").style.background.url = data[0].profile.photoCoverSrc
 }
