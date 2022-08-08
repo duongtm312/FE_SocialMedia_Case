@@ -52,7 +52,7 @@ function showPostUser(data) {
                                     <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
                                     <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a></li>
                                     <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
-                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
+                                    <li><a class="dropdown-item" onclick="deletePost(${p.idPost})"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Delete post</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
                                 </ul>
@@ -231,6 +231,27 @@ function createLikee(id) {
         }, error: function (err) {
             console.log("loi")
             getPost()
+            console.log(err)
+        }
+    })
+}
+
+function deletePost (idPost){
+    let token = localStorage.getItem("token");
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json',
+        },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
+        url: "http://localhost:8081/home/delete/" +idPost,
+        success: function (data) {
+            getPost()
+            console.log("xoa thanh cong")
+        },
+        error: function (err) {
             console.log(err)
         }
     })

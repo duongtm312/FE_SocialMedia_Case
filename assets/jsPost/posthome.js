@@ -42,12 +42,12 @@ function show(data) {
               <div class="d-flex align-items-center">
                
                 <div class="avatar avatar-story me-2">
-                  <a href="1"> <img class="avatar-img rounded-circle" src="${p.profile.avatarSrc}" alt=""> </a>
+                  <a href="my-profile-friend.html?user=${p.appUser.userName}"> <img class="avatar-img rounded-circle" src="${p.profile.avatarSrc}" alt=""> </a>
                 </div>
                
                 <div>
                   <div class="nav nav-divider">
-                    <h6 class="nav-item card-title mb-0"> <a href="#!"> ${p.profile.fullName} </a></h6>
+                    <h6 class="nav-item card-title mb-0"> <a href="my-profile-friend.html?user=${p.appUser.userName}"> ${p.profile.fullName} </a></h6>
                     <span class="nav-item small" > ${p.timePost}</span>
                   </div>
                 </div>
