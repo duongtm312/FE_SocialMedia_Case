@@ -1,7 +1,63 @@
-getPost();
-getProfile()
+let myKeysValues= window.location.search;
+let urlParams = new URLSearchParams(myKeysValues);
+let userFriend = urlParams.get("user");
+let token = localStorage.getItem("token")
+console.log(userFriend)
+
+function showProfile() {
+    $.ajax({
+        type: "GET", headers: {
+            //kiểu dữ liệu nhận về
+            'Accept': 'application/json', // kiểu truyền đi
+            // 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
+            console.log(token)
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, url: "http://localhost:8081/home/profile", // data: JSON.stringify(),
+        //xử lý khi thành công
+        success: function (profile) {
+            showPro(profile)
+            showProfileFriend()
+        }, error: function (err) {
+        }
+    })
+}
+
+function showPro(profile) {
+    document.getElementById("avatar12").src = profile.avatarSrc
+    document.getElementById("avatar13").src = profile.avatarSrc
+    document.getElementById("avatar14").src = profile.avatarSrc
+    document.getElementById("name2").innerHTML = profile.fullName
+    document.getElementById("job1").innerHTML = profile.job
+}
+function showProfileFriend() {
+    $.ajax({
+        type: "GET", headers: {
+            //kiểu dữ liệu nhận về
+            'Accept': 'application/json', // kiểu truyền đi
+            // 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
+            console.log(token)
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }
+        , url: "http://localhost:8081/api/chat/name?name=" +userFriend,
+        //xử lý khi thành công
+        success: function (profile) {
+            showProFriend(profile)
+        }, error: function (err) {
+            console.log(this.url)
+        }
+    })
+}
+function showProFriend(profile) {
+    document.getElementById("avatar11").src = profile.avatarSrc
+    document.getElementById("name1").innerHTML = profile.fullName
+    document.getElementById("job2").innerHTML = profile.job
+    document.getElementById("address1").innerHTML = profile.address
+    document.getElementById("start").innerHTML = profile.startJoin
+    document.getElementById("cover").style.backgroundImage = "url(" +profile.photoCoverSrc + ")"
+}
 function getPost() {
-    let token = localStorage.getItem("token");
     $.ajax({
         type: "GET",
         headers: {
@@ -10,12 +66,12 @@ function getPost() {
         },
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, data: {
+            userFriend: userFriend,
         },
-        url: "http://localhost:8081/home/postUser",
+        url: "http://localhost:8081/home/getPostFr",
         success: function (data) {
             showPostUser(data)
-
-
         },
         error: function (err) {
             console.log(err)
@@ -52,7 +108,7 @@ function showPostUser(data) {
                                     <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
                                     <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a></li>
                                     <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
-                                    <li><a class="dropdown-item" onclick="deletePost(${p.idPost})"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Delete post</a></li>
+                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
                                 </ul>
@@ -107,169 +163,51 @@ function showPostUser(data) {
                             
                         </div>
                         <!-- Comment wrap START -->
-                        <ul class="comment-wrap list-unstyled" id="showCmtProfile${p.idPost}">
+                        <ul class="comment-wrap list-unstyled" id="cmtProfile${p.idPost}">
                              <!-- Comment item START -->
-                
+                <li class="comment-item">
+                  <div class="d-flex position-relative">
+                    <!-- Avatar -->
+                    <div class="avatar avatar-xs">
+                      <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt=""></a>
+                    </div>
+                    <div class="ms-2">
+                      <!-- Comment by -->
+                      <div class="bg-light rounded-start-top-0 p-3 rounded">
+                        <div class="d-flex justify-content-between">
+                          <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
+                          <small class="ms-2">5hr</small>
+                        </div>
+                        <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
+                      </div>
+                      <!-- Comment react -->
+                      <ul class="nav nav-divider py-2 small">
+                        <li class="nav-item">
+                          <a class="nav-link" href="#!"> Like (3)</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#!"> Reply</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#!"> View 5 replies</a>
+                        </li>
+                      </ul>
+                            
+                                    <!-- Comment item END -->
+                                </ul>
+                            </li>
                         </ul>
                         <!-- Comment wrap END -->
                     </div>
                     <!-- Card body END -->
                     <!-- Card footer START -->
                     <div class="card-footer border-0 pt-0">
-                        <!-- Load more comments -->                      
+                        <!-- Load more comments -->
+                      
                 </div>
                 `
     }
     document.getElementById("showPostUser").innerHTML = str;
 }
-
-function getProfile() {
-    let token = localStorage.getItem("token");
-    $.ajax({
-        type: "GET", headers: {
-            //kiểu dữ liệu nhận về
-            'Accept': 'application/json', // kiểu truyền đi
-            // 'Content-Type': 'application/json'
-        }, beforeSend: function (xhr) {
-            console.log(token)
-            xhr.setRequestHeader("Authorization", "Bearer " + token);
-        }, url: "http://localhost:8081/home/profile", // data: JSON.stringify(),
-        //xử lý khi thành công
-        success: function (data) {
-
-            changeProfile(data);
-        }, error: function (err) {
-            console.log("lỗi")
-        }
-    })
-}
-function changeProfile(data) {
-    console.log(data)
-    document.getElementById("avatar11").src = data.avatarSrc
-    document.getElementById("avatar12").src = data.avatarSrc
-    document.getElementById("avatar13").src = data.avatarSrc
-    document.getElementById("avatar14").src = data.avatarSrc
-    document.getElementById("avatar15").src = data.avatarSrc
-    document.getElementById("name1").innerHTML = data.fullName
-    document.getElementById("name2").innerHTML = data.fullName
-    document.getElementById("job1").innerHTML = data.job
-    document.getElementById("job2").innerHTML = data.job
-    document.getElementById("address1").innerHTML = data.address
-    document.getElementById("start").innerHTML = data.startJoin
-    document.getElementById("cover").style.backgroundImage = "url(" +data.photoCoverSrc + ")"
-}
-
-function createCmtt(idPost) {
-    let contentCmt = $("#cmtContentt" + idPost).val();
-    console.log(contentCmt)
-    let token = localStorage.getItem("token");
-    let comments = {
-        content: contentCmt,
-        idP: idPost,
-    }
-    $.ajax({
-        type: "POST", headers: {
-            'Accept': 'application/json', 'Content-Type': 'application/json'
-        }, beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + token);
-        }, url: "http://localhost:8081/home/createComment ", data: JSON.stringify(comments),
-        success: function (data) {
-            console.log("cmt thanh cong")
-            document.getElementById("cmtContentt" + idPost).value = ""
-            getPost()
-        }, error: function (err) {
-            console.log("loi cmt")
-            console.log(err)
-        }
-    })
-}
-
-function createLikee(id) {
-    token = localStorage.getItem("token")
-    $.ajax({
-        type: "POST", headers: {
-            // 'Accept': 'application/json',
-            'Content-Type': 'application/json'
-
-        }, beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + token);
-        }, // data: JSON.stringify(),
-
-        url: "http://localhost:8081/like/" + id, success: function () {
-            console.log("thanh cong ")
-        }, error: function (err) {
-            console.log("loi")
-            getPost()
-            console.log(err)
-        }
-    })
-}
-
-function deletePost (idPost){
-    let token = localStorage.getItem("token");
-    $.ajax({
-        type: "GET",
-        headers: {
-            'Accept': 'application/json',
-        },
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + token);
-        },
-        url: "http://localhost:8081/home/delete/" +idPost,
-        success: function (data) {
-            getPost()
-            console.log("xoa thanh cong")
-        },
-        error: function (err) {
-            console.log(err)
-        }
-    })
-}
-
-function getCommentt (idPost){
-    let token = localStorage.getItem("token")
-    $.ajax({
-
-        type: "GET", headers: {
-            'Accept': 'application/json', 'Content-Type': 'application/json'
-        }, beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + token);
-        }, url: "http://localhost:8081/home/comment/" + idPost, //xử lý khi thành công
-        success: function (data) {
-            showCommentt(data, idPost)
-        }, error: function (err) {
-            console.log("loi")
-            console.log(err)
-        }
-    })
-}
-
-function showCommentt(data,idPost){
-    let str = ""
-    for (const cmt of data) {
-        str += `<li class="comment-item" >
-                  <div class="d-flex position-relative">
-                    <!-- Avatar -->
-                    <div class="avatar avatar-xs">
-                      <a href="#!"><img class="avatar-img rounded-circle" src="${cmt.profile.avatarSrc}" alt=""></a>
-                    </div>
-                    <div class="ms-2">
-                      <!-- Comment by -->
-                      <div class="bg-light rounded-start-top-0 p-3 rounded">
-                        <div class="d-flex justify-content-between">
-                          <h6 class="mb-1"> <a href="#!"> ${cmt.profile.fullName} </a></h6>
-                          <small class="ms-2">${cmt.timeCmt}</small>
-                        </div>
-                        <p class="small mb-0">${cmt.contentCmt}</p>
-                      </div>
-                      <!-- Comment react -->
-                      <ul class="nav nav-divider py-2 small">
-                        <li class="nav-item">
-                          <a class="nav-link" href="#!"> Like (${cmt.numLikeCmt})</a>
-                        </li>                                            
-                      </ul>                 
-                            </li>`
-    }
-    let id = "showCmtProfile" + idPost
-    document.getElementById(id).innerHTML = str
-}
+getPost()
+window.onload(showProfile())
