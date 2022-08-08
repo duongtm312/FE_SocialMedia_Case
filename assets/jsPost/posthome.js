@@ -5,6 +5,7 @@ postHome();
 showProfile()
 getAddFriend()
 
+
 // show post
 function postHome() {
     $.ajax({
@@ -20,6 +21,7 @@ function postHome() {
         success: function (data) {
             console.log("thành công")
             console.log(data)
+
             // showProfile()
             show(data);
         }, error: function (err) {
@@ -30,17 +32,19 @@ function postHome() {
 
 function show(data) {
     console.log("show")
+
     srcava = localStorage.getItem("avatardn")
     let str = "";
     for (const p of data) {
-        str += `<div class="card-header border-0 pb-0">
+        str += `
+ <div class="card-header border-0 pb-0">
             <div class="d-flex align-items-center justify-content-between"> 
               <div class="d-flex align-items-center">
-                <!-- Avatar -->
+               
                 <div class="avatar avatar-story me-2">
                   <a href="1"> <img class="avatar-img rounded-circle" src="${p.profile.avatarSrc}" alt=""> </a>
                 </div>
-                <!-- Info -->
+               
                 <div>
                   <div class="nav nav-divider">
                     <h6 class="nav-item card-title mb-0"> <a href="#!"> ${p.profile.fullName} </a></h6>
@@ -48,7 +52,7 @@ function show(data) {
                   </div>
                 </div>
               </div>
-              <!-- Card feed action dropdown START -->
+              
               <div class="dropdown">
                 <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="bi bi-three-dots"></i>
@@ -106,21 +110,18 @@ function show(data) {
                  <a href="#!"> <img class="avatar-img rounded-circle"  src="${srcava}" alt=""> </a>
                </div>
               <!-- Comment box  -->
-             
+          
                 <textarea data-autoresize class="form-control pe-4 bg-light" id="cmtContent${p.idPost}" rows="1" placeholder="Add a comment..."></textarea>
              <a class="btn" onclick="createCmt(${p.idPost})"> Send</a>
             </div>
             <!-- Comment wrap START -->
             <ul class="comment-wrap list-unstyled" id="showComment${p.idPost}">
-
-          </div>
-          <!-- Card body END -->
-          <!-- Card footer START -->
-          <div class="card-footer border-0 pt-0">
-            <!-- Load more comments -->
-            <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
-            </a>
-          </div>`
+            
+              <!-- Comment item END -->
+            </ul>
+          </div>     
+         
+        `
     }
     document.getElementById("showhome").innerHTML = str;
     showTime()
@@ -333,8 +334,8 @@ function getComment(idPost) {
 function showComment(data, idPost) {
     let str = "";
     for (const cmt of data) {
-        str += `
-             <li class="comment-item">
+        str += `<li class="comment-item">
+           
                 <div class="d-flex position-relative">
                   <!-- Avatar -->
                   <div class="avatar avatar-xs">
@@ -361,10 +362,9 @@ function showComment(data, idPost) {
                 <!-- Load more replies -->
                 <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center mb-3 ms-5" data-bs-toggle="button" aria-pressed="true">
                 </a>
+                </li>
                 <!-- Comment item nested END -->
-              </li>
-              <!-- Comment item END -->
-            </ul>`
+              `
     }
     let id = "showComment" + idPost;
     document.getElementById(id).innerHTML = str;
@@ -502,11 +502,10 @@ function createCmt(idPost) {
         }
     })
 }
- function showTime () {
+function showTime () {
     let dates = document.querySelectorAll(".nav-divider > span")
     for (let i = 0; i < dates.length; i++) {
         let d = dates[i]
         d.innerHTML = moment(d.innerHTML).fromNow()
-
     }
 }
