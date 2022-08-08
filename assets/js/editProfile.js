@@ -10,6 +10,10 @@ function showEdit(profile) {
     document.getElementById("startJoin").value = profile.startJoin;
     document.getElementById("gender").value = profile.gender;
     document.getElementById("email").value = profile.appUser.email;
+    document.getElementById("avatar11").src = profile.avatarSrc
+    document.getElementById("avatar12").src = profile.avatarSrc
+    document.getElementById("name1").innerHTML = profile.fullName
+    document.getElementById("job1").innerHTML = profile.job
 }
 
 function getEdit() {
