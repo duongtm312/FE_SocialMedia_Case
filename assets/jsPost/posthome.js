@@ -443,7 +443,7 @@ function showAddFriend(data) {
                     <p class="mb-0 small text-truncate">${af.profile.job}</p>
                   </div>
                   <!-- Button -->
-                  <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" onclick="acceptFriend(${af.appUser1.userName})" href="#"><i class="fa-solid fa-plus"> </i></a>
+                  <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" onclick="acceptFriend('${af.appUser1.userName}')" href="#"><i class="fa-solid fa-plus"> </i></a>
 
                 </div>`
 

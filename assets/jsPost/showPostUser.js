@@ -121,6 +121,7 @@ function showPostUser(data) {
                 `
     }
     document.getElementById("showPostUser").innerHTML = str;
+    showTime()
 }
 
 function getProfile() {
@@ -256,9 +257,9 @@ function showCommentt(data,idPost){
                     <div class="ms-2">
                       <!-- Comment by -->
                       <div class="bg-light rounded-start-top-0 p-3 rounded">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between nav-divider">
                           <h6 class="mb-1"> <a href="#!"> ${cmt.profile.fullName} </a></h6>
-                          <small class="ms-2">${cmt.timeCmt}</small>
+                          <span class="ms-2">${cmt.timeCmt}</span>
                         </div>
                         <p class="small mb-0">${cmt.contentCmt}</p>
                       </div>
@@ -272,4 +273,12 @@ function showCommentt(data,idPost){
     }
     let id = "showCmtProfile" + idPost
     document.getElementById(id).innerHTML = str
+    showTime()
+}
+function showTime () {
+    let dates = document.querySelectorAll(".nav-divider > span")
+    for (let i = 0; i < dates.length; i++) {
+        let d = dates[i]
+        d.innerHTML = moment(d.innerHTML).fromNow()
+    }
 }
