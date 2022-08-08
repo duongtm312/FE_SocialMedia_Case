@@ -185,5 +185,5 @@ function changeProfile(data) {
     document.getElementById("job2").innerHTML = data.job
     document.getElementById("address1").innerHTML = data.address
     document.getElementById("start").innerHTML = data.startJoin
-    document.getElementById("cover1").style.backgroundImage = "url(" +data.photoCoverSrc + ")"
+    document.getElementById("cover1").src = data.photoCoverSrc
 }

@@ -236,8 +236,8 @@ Header END -->
                 <!-- My profile START -->
                 <div class="card">
                     <!-- Cover image -->
-                    <a  href="#!" data-bs-toggle="modal" data-bs-target="#feedActionPhoto" >  <div class="h-200px rounded-top" id="cover" style="background-image:url(assets/images/bg/05.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
-
+                    <a  href="#!" data-bs-toggle="modal" data-bs-target="#feedActionPhoto" >  <div class="h-200px rounded-top" style="background-image:url(); background-position: center; background-size: cover; background-repeat: no-repeat;">
+                        <img id="cover" style="width: 750px ; height: 200px" src="">
                     </div></a>
                     <!-- Card body START -->
                     <div class="card-body py-0">
@@ -651,26 +651,14 @@ Header END -->
                 <!-- Add Feed -->
                 <div class="d-flex mb-3">
                     <!-- Avatar -->
-                    <div class="avatar avatar-xs me-2">
-                        <img class="avatar-img rounded-circle" src="https://loanthehongnhan.vn/hinh-anh-ve-meo/imager_27122.jpg" alt="">
-                    </div>
-                    <!-- Feed box  -->
-                    <form class="w-100">
-                        <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="2" placeholder="Share your thoughts..."></textarea>
+                    <table>
+                        <tbody><tr><td><input id="photoCoverImg" type="file"></td></tr>
+                        </tbody></table>
 
-                    </form>
                 </div>
 
                 <!-- Dropzone photo START -->
-                <div>
-                    <label class="form-label">Upload attachment</label>
-                    <div class="dropzone dropzone-default card shadow-none" data-dropzone='{"maxFiles":2}'>
-                        <div class="dz-message">
-                            <i class="bi bi-images display-3"></i>
-                            <p>Drag here or click to upload photo.</p>
-                        </div>
-                    </div>
-                </div>
+
                 <!-- Dropzone photo END -->
 
             </div>
@@ -680,7 +668,7 @@ Header END -->
             <div class="modal-footer ">
                 <!-- Button -->
                 <button type="button" class="btn btn-danger-soft me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                <button type="button" class="btn btn-success-soft">Post</button>
+                <button type="button" class="btn btn-success-soft" onclick="uploadCover()">Post</button>
             </div>
             <!-- Modal feed footer -->
         </div>

@@ -157,7 +157,8 @@ function changeProfile(data) {
     document.getElementById("job2").innerHTML = data.job
     document.getElementById("address1").innerHTML = data.address
     document.getElementById("start").innerHTML = data.startJoin
-    document.getElementById("cover").style.backgroundImage = "url(" +data.photoCoverSrc + ")"
+    console.log(data.photoCoverSrc)
+    document.getElementById("cover").src = data.photoCoverSrc
 }
 
 function createCmtt(idPost) {
@@ -294,6 +295,21 @@ function uploadAvatar() {
             getPost()
             getProfile()
             document.getElementById("avatarImg").value = ""
+        }
+    });
+}
+function uploadCover() {
+    let token = localStorage.getItem("token")
+    let fileImg = document.getElementById("photoCoverImg").files;
+    let formData = new FormData();
+    formData.append("file", fileImg[0]);
+    $.ajax({
+        contentType: false, processData: false, type: "POST", data: formData, beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, url: "http://localhost:8081/home/changeCover", success: function (data) {
+            getPost()
+            getProfile()
+            document.getElementById("photoCoverImg").value = ""
         }
     });
 }
