@@ -108,7 +108,34 @@ function showPostUser(data) {
                         </div>
                         <!-- Comment wrap START -->
                         <ul class="comment-wrap list-unstyled" id="cmtProfile${p.idPost}">
-                            <!-- Comment item START -->
+                             <!-- Comment item START -->
+                <li class="comment-item">
+                  <div class="d-flex position-relative">
+                    <!-- Avatar -->
+                    <div class="avatar avatar-xs">
+                      <a href="#!"><img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt=""></a>
+                    </div>
+                    <div class="ms-2">
+                      <!-- Comment by -->
+                      <div class="bg-light rounded-start-top-0 p-3 rounded">
+                        <div class="d-flex justify-content-between">
+                          <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
+                          <small class="ms-2">5hr</small>
+                        </div>
+                        <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
+                      </div>
+                      <!-- Comment react -->
+                      <ul class="nav nav-divider py-2 small">
+                        <li class="nav-item">
+                          <a class="nav-link" href="#!"> Like (3)</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#!"> Reply</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#!"> View 5 replies</a>
+                        </li>
+                      </ul>
                             
                                     <!-- Comment item END -->
                                 </ul>
