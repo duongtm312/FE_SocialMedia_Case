@@ -313,3 +313,38 @@ function uploadCover() {
         }
     });
 }
+function upFileAvatar() {
+    let filename = document.getElementById("avatarImg");
+    let link=document.getElementById("anhAvatar")
+
+    if (filename.files[0]!==undefined){
+        link.files=filename.files
+    }
+    if (link.files && link.files[0]){
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById("imageAvatar").src = e.target.result;
+        }
+        reader.readAsDataURL(filename.files[0]);
+    }
+}
+
+function upFileCover() {
+    let filename = document.getElementById("photoCoverImg");
+    let link=document.getElementById("anhCover")
+
+    if (filename.files[0]!==undefined){
+        link.files=filename.files
+    }
+    if (link.files && link.files[0]){
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById("imageCover").src = e.target.result;
+        }
+        reader.readAsDataURL(filename.files[0]);
+    }
+}
+
+
+
+

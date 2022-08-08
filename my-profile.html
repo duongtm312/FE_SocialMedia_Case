@@ -647,20 +647,16 @@ Header END -->
             <!-- Modal feed header END -->
 
             <!-- Modal feed body START -->
-            <div class="modal-body">
-                <!-- Add Feed -->
-                <div class="d-flex mb-3">
-                    <!-- Avatar -->
-                    <table>
-                        <tbody><tr><td><input id="photoCoverImg" type="file"></td></tr>
-                        </tbody></table>
-
+            <div>
+                <div align="center" style="height: 200px">
+                    <div class="dz-message" align="center">
+                        <label for="photoCoverImg">
+                            <img id="imageCover" src="https://static.vnncdn.net/v1/icon/icon-no-image.svg" style="width: 430px; height: 200px">
+                        </label>
+                        <input align="center" id="photoCoverImg" type="file" onchange="upFileCover()" hidden>
+                        <input type="file" id="anhCover" hidden>
+                    </div>
                 </div>
-
-                <!-- Dropzone photo START -->
-
-                <!-- Dropzone photo END -->
-
             </div>
             <!-- Modal feed body END -->
 
@@ -668,7 +664,7 @@ Header END -->
             <div class="modal-footer ">
                 <!-- Button -->
                 <button type="button" class="btn btn-danger-soft me-2" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                <button type="button" class="btn btn-success-soft" onclick="uploadCover()">Post</button>
+                <button type="button" class="btn btn-success-soft" onclick="uploadCover()" data-bs-dismiss="modal">Post</button>
             </div>
             <!-- Modal feed footer -->
         </div>
@@ -695,12 +691,17 @@ Header END -->
                 </div>
 
                 <!-- Dropzone photo START -->
-                <div class="modal-body">
-                    <table>
-                        <tr><td><input id="avatarImg" type="file"></td></tr>
-                    </table>
+                <div>
+                    <div align="center" style="height: 200px">
+                        <div class="dz-message" align="center">
+                            <label for="avatarImg">
+                                <img id="imageAvatar" src="https://static.vnncdn.net/v1/icon/icon-no-image.svg" style="width: 150px; height: 200px">
+                            </label>
+                            <input align="center" id="avatarImg" type="file" onchange="upFileAvatar()" hidden>
+                            <input type="file" id="anhAvatar" hidden>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
             <div class="modal-footer">
                 <!-- Button -->
