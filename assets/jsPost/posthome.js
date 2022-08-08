@@ -123,6 +123,7 @@ function show(data) {
           </div>`
     }
     document.getElementById("showhome").innerHTML = str;
+    showTime()
 }
 
 // show profile
@@ -501,7 +502,7 @@ function createCmt(idPost) {
         }
     })
 }
-window.onload = function () {
+ function showTime () {
     let dates = document.querySelectorAll(".nav-divider > span")
     for (let i = 0; i < dates.length; i++) {
         let d = dates[i]
