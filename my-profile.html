@@ -26,7 +26,9 @@
 
 	<!-- Theme CSS -->
 	<link id="style-switch" rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <script src="ajax/changeAvatar.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 
 </head>
 
@@ -82,10 +84,10 @@ Header START -->
 							<li> <a class="dropdown-item" href="landing.html">Landing page</a></li>
 							<li> <a class="dropdown-item" href="app-download.html">App download</a></li>
               <li class="dropdown-divider"></li>
-							<li> 
+							<li>
 								<a class="dropdown-item" href="" >
 									<i class="text-success fa-fw bi bi-cloud-download-fill me-2"></i>Buy Social!
-								</a> 
+								</a>
 							</li>
 						</ul>
 					</li>
@@ -97,7 +99,7 @@ Header START -->
 							<li> <a class="dropdown-item" href="celebration.html">Celebration</a></li>
               <li> <a class="dropdown-item" href="messaging.html">Messaging</a></li>
 							<!-- Dropdown submenu -->
-							<li class="dropdown-submenu dropend"> 
+							<li class="dropdown-submenu dropend">
                 <a class="dropdown-item dropdown-toggle" href="#!">Profile</a>
 								<ul class="dropdown-menu" data-bs-popper="none">
 									<li> <a class="dropdown-item" href="my-profile.html">Feed</a> </li>
@@ -121,7 +123,7 @@ Header START -->
 							<li> <a class="dropdown-item" href="video-details.html">Video details</a></li>
               <li> <a class="dropdown-item" href="blog.html">Blog</a></li>
 							<li> <a class="dropdown-item" href="blog-details.html">Blog details</a></li>
-              
+
 							<!-- Dropdown submenu levels -->
 							<li class="dropdown-divider"></li>
 							<li class="dropdown-submenu dropend">
@@ -294,15 +296,15 @@ Header START -->
             </li>
             <!-- Links -->
             <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear fa-fw me-2"></i>Settings & Privacy</a></li>
-            <li> 
+            <li>
               <a class="dropdown-item" href="http://www.bootstrapmb.com" >
                 <i class="fa-fw bi bi-life-preserver me-2"></i>Support
-              </a> 
+              </a>
             </li>
-            <li> 
+            <li>
               <a class="dropdown-item" href="" >
                 <i class="fa-fw bi bi-card-text me-2"></i>Documentation
-              </a> 
+              </a>
             </li>
             <li class="dropdown-divider"></li>
             <li><a class="dropdown-item bg-danger-soft-hover" href="sign-in-advance.html"><i class="bi bi-power fa-fw me-2"></i>Sign Out</a></li>
@@ -315,12 +317,12 @@ Header START -->
                 </div>
                 <span>Dark mode</span>
               </div>
-            </li> 
+            </li>
             <!-- Dark mode switch END -->
           </ul>
 				</li>
 			  <!-- Profile START -->
-        
+
 			</ul>
 			<!-- Nav right END -->
 		</div>
@@ -343,42 +345,44 @@ Header END -->
         <div class="card">
           <!-- Cover image -->
             <a  href="#!" data-bs-toggle="modal" data-bs-target="#feedActionPhoto" >  <div class="h-200px rounded-top" style="background-image:url(assets/images/bg/05.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
+                <nav class="navbar navbar-expand-lg mx-0" id="show">
 
+                </nav>
           </div></a>
             <!-- Card body START -->
             <div class="card-body py-0">
-              <div class="d-sm-flex align-items-start text-center text-sm-start">
-                <div>
-                  <!-- Avatar -->
-                  <div class="avatar avatar-xxl mt-n5 mb-3">
-                      <a href="#!" data-bs-toggle="modal" data-bs-target="#feedActionVideo"> <img src="https://static2.yan.vn/YanNews/2167221/202003/dan-mang-du-trend-thiet-ke-avatar-du-kieu-day-mau-sac-tu-anh-mac-dinh-b0de2bad.jpg" class="avatar-img rounded-circle border border-white border-3"></a>
-                      <tbody id="show"></tbody>
-                  </div>
+                <div class="d-sm-flex align-items-start text-center text-sm-start">
+                    <div>
+                        <!-- Avatar -->
+                        <div class="avatar avatar-xxl mt-n5 mb-3">
+                            <a href="#!" data-bs-toggle="modal" data-bs-target="#feedActionVideo"> <img src="" class="avatar-img rounded-circle border border-white border-3"></a>
+
+                        </div>
+                    </div>
+                    <div class="ms-sm-4 mt-sm-3">
+                        <!-- Info -->
+                        <h1 class="mb-0 h5">Sam Lanson <i class="bi bi-patch-check-fill text-success small"></i></h1>
+                        <p>250 connections</p>
+                    </div>
+                    <!-- Button -->
+                    <div class="d-flex mt-3 justify-content-center ms-sm-auto">
+                        <button class="btn btn-danger-soft me-2" type="button"> <i class="bi bi-pencil-fill pe-1"></i> Edit profile </button>
+                        <div class="dropdown">
+                            <!-- Card share action menu -->
+                            <button class="icon-md btn btn-light" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots"></i>
+                            </button>
+                            <!-- Card share action dropdown menu -->
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
+                                <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share profile in a message</a></li>
+                                <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li>
+                                <li><a class="dropdown-item" href="#"> <i class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#"> <i class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="ms-sm-4 mt-sm-3">
-                  <!-- Info -->
-                  <h1 class="mb-0 h5">Sam Lanson <i class="bi bi-patch-check-fill text-success small"></i></h1>
-                  <p>250 connections</p>
-                </div>
-                <!-- Button -->
-                <div class="d-flex mt-3 justify-content-center ms-sm-auto">
-                  <button class="btn btn-danger-soft me-2" type="button"> <i class="bi bi-pencil-fill pe-1"></i> Edit profile </button>
-                  <div class="dropdown">
-                    <!-- Card share action menu -->
-                    <button class="icon-md btn btn-light" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">
-                      <i class="bi bi-three-dots"></i>
-                    </button>
-                    <!-- Card share action dropdown menu -->
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
-                      <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share profile in a message</a></li>
-                      <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li>
-                      <li><a class="dropdown-item" href="#"> <i class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#"> <i class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
               <!-- List profile -->
               <ul class="list-inline mb-0 text-center text-sm-start mt-3 mt-sm-0">
                 <li class="list-inline-item"><i class="bi bi-briefcase me-1"></i> Lead Developer</li>
@@ -626,7 +630,7 @@ Header END -->
                       <span class="spinner-dot"></span>
                       <span class="spinner-dot"></span>
                     </div>
-                    Load more replies 
+                    Load more replies
                   </a>
                   <!-- Comment item nested END -->
                 </li>
@@ -676,7 +680,7 @@ Header END -->
                   <span class="spinner-dot"></span>
                   <span class="spinner-dot"></span>
                 </div>
-                Load more comments 
+                Load more comments
               </a>
             </div>
             <!-- Card footer END -->
@@ -685,7 +689,7 @@ Header END -->
 
           <!-- Card feed item START -->
           <div class="card">
-            
+
             <div class="border-bottom">
               <p class="small mb-0 px-4 py-2"><i class="bi bi-heart-fill text-danger pe-1"></i>Sam Lanson likes this post</p>
             </div>
@@ -859,7 +863,7 @@ Header END -->
             </div>
           </div>
           <!-- Card END -->
-          
+
           <!-- Card START -->
           <div class="col-md-6 col-lg-12">
             <div class="card">
@@ -1057,7 +1061,7 @@ Header END -->
         <!-- Feed rect END -->
       </div>
       <!-- Modal feed body END -->
-      
+
       <!-- Modal feed footer -->
       <div class="modal-footer row justify-content-between">
         <!-- Select -->
@@ -1156,12 +1160,16 @@ Header END -->
           <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="2" placeholder="Share your thoughts..."></textarea>
         </form>
       </div>
-
       <!-- Dropzone photo START -->
           <div class="modal-body">
-              <table>
-                  <tr><td><input id="img" type="file"></td></tr>
-              </table>
+
+          </div>
+          <div align="center" style="height: 200px">
+              <div class="dz-message" align="center">
+                  <i class="bi bi-images display-3"></i>
+                  <p>Upload your imagine</p>
+                  <input align="center" id="img" type="file">
+              </div>
           </div>
       <!-- Dropzone photo END -->
 
@@ -1258,7 +1266,7 @@ Header END -->
               </li>
             </ul>
           </div>
-          <!-- Upload Photos or Videos -->
+          <!-- Upload Photos or Vide,os -->
           <!-- Dropzone photo START -->
           <div>
             <label class="form-label">Upload attachment</label>
@@ -1299,6 +1307,6 @@ JS libraries, plugins and custom scripts -->
 
 <!-- Template Functions -->
 <script src="assets/js/functions.js"></script>
-
+<script src="ajax/changeAvatar.js"></script>
 </body>
 </html>

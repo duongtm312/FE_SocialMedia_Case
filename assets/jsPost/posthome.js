@@ -11,7 +11,7 @@ function postHome (){
             //kiểu dữ liệu nhận về
             'Accept': 'application/json',
             // kiểu truyền đi
-            // 'Content-Type': 'application/json'
+             'Content-Type': 'application/json'
         },
         beforeSend: function (xhr) {
             console.log(token)
