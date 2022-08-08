@@ -35,6 +35,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GMKQ4P9YMZ"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/vi.min.js"></script>-->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -397,7 +398,7 @@ Header END -->
         <!-- Card feed item END -->
 
           <!-- Load more button START -->
-          <a href="#!" role="button" class="btn btn-loader btn-primary-soft" data-bs-toggle="button" aria-pressed="true">
+          <a href="#!" role="button" class="btn btn-loader btn-primary-soft" data-bs-toggle="button" aria-pressed="true" onclick="renderPost()">
             <span class="load-text"> Load more </span>
             <div class="load-icon">
               <div class="spinner-grow spinner-grow-sm" role="status">
@@ -567,7 +568,7 @@ Header END -->
         <div class="d-flex mb-3">
           <!-- Avatar -->
           <div class="avatar avatar-xs me-2">
-            <img class="avatar-img rounded-circle" id="avatar4" src="assets/images/avatar/03.jpg" alt="">
+            <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="">
           </div>
           <!-- Feed box  -->
           <form class="w-100">
@@ -579,9 +580,11 @@ Header END -->
         <div>
           <div align="center" style="height: 200px">
             <div class="dz-message" align="center">
-              <i  class="bi bi-images display-3"></i>
-              <p>Upload your imagine</p>
-              <input align="center" id="img" type="file">
+              <label for="img">
+                <img id="image" src="https://cdn-icons-png.flaticon.com/512/70/70310.png" style="width: 216px; height: auto">
+              </label>
+              <input align="center" id="img" type="file" onchange="upFile()" hidden>
+              <input type="file" id="anh" hidden>
             </div>
           </div>
         </div>
@@ -594,7 +597,7 @@ Header END -->
         <div class="modal-footer ">
           <!-- Button -->
             <button type="button" class="btn btn-danger-soft me-2" data-bs-dismiss="modal"  >Cancel</button>
-            <button type="button" class="btn btn-success-soft" data-bs-dismiss="modal" onclick="uploadFile()" >Post</button>
+            <button type="button" class="btn btn-success-soft" onclick="uploadFile()" data-bs-dismiss="modal">Post</button>
         </div>
         <!-- Modal feed footer -->
     </div>

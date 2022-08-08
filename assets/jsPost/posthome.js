@@ -30,6 +30,9 @@ function postHome() {
     })
 }
 
+
+
+
 function show(data) {
     console.log("show")
 
@@ -274,7 +277,6 @@ function showDateProfile(dataProfile) {
 
 // create post
 function uploadFile() {
-    console.log("vào up file")
     let fileImg = document.getElementById("img").files;
     console.log(fileImg)
     let formData = new FormData();
@@ -287,6 +289,23 @@ function uploadFile() {
             createPost(data);
         }
     });
+}
+
+
+    function upFile() {
+    let filename = document.getElementById("img");
+    let link=document.getElementById("anh")
+
+    if (filename.files[0]!==undefined){
+    link.files=filename.files
+}
+    if (link.files && link.files[0]){
+    let reader = new FileReader();
+    reader.onload = function (e) {
+    document.getElementById("image").src = e.target.result;
+}
+    reader.readAsDataURL(filename.files[0]);
+}
 }
 
 function createPost(data) {
@@ -319,13 +338,10 @@ function getComment(idPost) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         }, url: "http://localhost:8081/home/comment/" + idPost, //xử lý khi thành công
         success: function (data) {
-            console.log(data)
-            console.log(idPost)
             showComment(data, idPost)
-            console.log("comment")
 
         }, error: function (err) {
-            console.log("loi")
+
             console.log(err)
         }
     })
@@ -344,9 +360,9 @@ function showComment(data, idPost) {
                   <div class="ms-2">
                     <!-- Comment by -->
                     <div class="bg-light rounded-start-top-0 p-3 rounded">
-                      <div class="d-flex justify-content-between">
+                      <div class="d-flex justify-content-between nav-divider">
                         <h6 class="mb-1"> <a href="#!"> ${cmt.profile.fullName} </a></h6>
-                        <small class="ms-2">${cmt.timeCmt}</small>
+                        <span class="ms-2">${cmt.timeCmt}</span>
                       </div>
                       <p class="small mb-0">${cmt.contentCmt}</p>
                     </div>
@@ -368,6 +384,7 @@ function showComment(data, idPost) {
     }
     let id = "showComment" + idPost;
     document.getElementById(id).innerHTML = str;
+    showTime()
 }
 
 // create like
