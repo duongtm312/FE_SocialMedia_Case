@@ -123,6 +123,37 @@ function showPostUser(data) {
     document.getElementById("showPostUser").innerHTML = str;
     showTime()
 }
+function upFilee() {
+    let filename = document.getElementById("img");
+    let link=document.getElementById("anh")
+
+    if (filename.files[0]!==undefined){
+        link.files=filename.files
+    }
+    if (link.files && link.files[0]){
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById("image").src = e.target.result;
+        }
+        reader.readAsDataURL(filename.files[0]);
+    }
+}
+
+function uploadFilee() {
+    let token = localStorage.getItem("token");
+    let fileImg = document.getElementById("img").files;
+    console.log(fileImg)
+    let formData = new FormData();
+    formData.append("file", fileImg[0]);
+    $.ajax({
+        contentType: false, processData: false, type: "POST", data: formData, beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, url: "http://localhost:8081/home/upImg", success: function (data) {
+            console.log(data)
+            createPostt(data);
+        }
+    });
+}
 
 function getProfile() {
     let token = localStorage.getItem("token");
@@ -312,4 +343,25 @@ function uploadCover() {
             document.getElementById("photoCoverImg").value = ""
         }
     });
+}
+function createPostt(data) {
+    let token = localStorage.getItem("token")
+    let contentPost = $("#sttt").val();
+    let post = {
+        contentPost: contentPost, photoPostSrc: data,
+    }
+    $.ajax({
+        type: "POST", headers: {
+            'Accept': 'application/json', 'Content-Type': 'application/json'
+        }, beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, url: "http://localhost:8081/home/createPost ", data: JSON.stringify(post), //xử lý khi thành công
+        success: function (data) {
+            document.getElementById("sttt").value =""
+            document.getElementById("img").value = ""
+            getPost()
+        }, error: function (err) {
+            console.log(err)
+        }
+    })
 }

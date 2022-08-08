@@ -595,9 +595,16 @@ Header END -->
                         <img class="avatar-img rounded-circle" id="avatar15" src="assets/images/avatar/03.jpg" alt="">
                     </div>
                     <!-- Feed box  -->
-                    <form class="w-100">
-                        <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="4" placeholder="Share your thoughts..." autofocus></textarea>
-                    </form>
+                    <div class="w-100">
+                        <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="4" id="sttt" placeholder="Share your thoughts..." autofocus></textarea>
+                        <div class="dz-message" align="center">
+                            <label for="img">
+                                <img id="image" src="https://cdn-icons-png.flaticon.com/512/70/70310.png" style="width: 150px; height: 200px">
+                            </label>
+                            <input align="center" id="img" type="file" onchange="upFilee()" hidden>
+                            <input type="file" id="anh" hidden>
+                        </div>
+                    </div>
                 </div>
                 <!-- Feed rect START -->
                 <div class="hstack gap-2">
@@ -626,7 +633,7 @@ Header END -->
                 <!-- Button -->
                 <div class="col-lg-8 text-sm-end">
                     <button type="button" class="btn btn-danger-soft me-2"> <i class="bi bi-camera-video-fill pe-1"></i> Live video</button>
-                    <button type="button" class="btn btn-success-soft" onclick="createPostProfile()">Post</button>
+                    <button type="button" class="btn btn-success-soft" onclick="uploadFilee()" data-bs-dismiss="modal">Post</button>
                 </div>
             </div>
             <!-- Modal feed footer -->
