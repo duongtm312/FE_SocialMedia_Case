@@ -702,32 +702,22 @@ Header END -->
             <div class="modal-body">
                 <!-- Add Feed -->
                 <div class="d-flex mb-3">
-                    <!-- Avatar -->
-                    <div class="avatar avatar-xs me-2">
-                        <img class="avatar-img rounded-circle" src="https://i.pinimg.com/564x/27/7a/06/277a06d75018f55248c46cdd7701100e.jpg" alt="">
-                    </div>
-                    <!-- Feed box  -->
-                    <form class="w-100">
-                        <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="2" placeholder="Share your thoughts..."></textarea>
-                    </form>
+
+
                 </div>
 
                 <!-- Dropzone photo START -->
                 <div class="modal-body">
                     <table>
-                        <tr><td><input id="img" type="file"></td></tr>
+                        <tr><td><input id="avatarImg" type="file"></td></tr>
                     </table>
                 </div>
-                <!-- Dropzone photo END -->
-
             </div>
-            <!-- Modal feed body END -->
 
-            <!-- Modal feed footer -->
             <div class="modal-footer">
                 <!-- Button -->
                 <button type="button" class="btn btn-danger-soft me-2" data-bs-dismiss="modal" aria-label="Close">Close</button>
-                <button type="button" class="btn btn-success-soft" data-dismiss="modal" onclick="uploadFile()">Post</button>
+                <button type="button" class="btn btn-success-soft" onclick="uploadAvatar()" data-bs-dismiss="modal" >Post</button>
             </div>
             <!-- Modal feed footer -->
         </div>

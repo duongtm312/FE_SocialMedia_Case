@@ -282,3 +282,18 @@ function showTime () {
         d.innerHTML = moment(d.innerHTML).fromNow()
     }
 }
+function uploadAvatar() {
+    let token = localStorage.getItem("token")
+    let fileImg = document.getElementById("avatarImg").files;
+    let formData = new FormData();
+    formData.append("file", fileImg[0]);
+    $.ajax({
+        contentType: false, processData: false, type: "POST", data: formData, beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        }, url: "http://localhost:8081/home/changeAvatar", success: function (data) {
+            getPost()
+            getProfile()
+            document.getElementById("avatarImg").value = ""
+        }
+    });
+}
