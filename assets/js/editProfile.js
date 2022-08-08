@@ -1,5 +1,4 @@
 function showEdit(profile) {
-    console.log("ok")
     document.getElementById("idProfile").value = profile.idProfile;
     document.getElementById("fullName").value = profile.fullName;
     document.getElementById("phoneNumber").value = profile.phoneNumber;
@@ -30,9 +29,6 @@ function getEdit() {
         url: "http://localhost:8081/profiles/profile",
         //xử lý khi thành công
         success: function (data) {
-            // console.log(data)
-            // console.log('vao day')
-            console.log(data)
             showEdit(data);
         },
         error: function (err) {

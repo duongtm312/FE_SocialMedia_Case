@@ -27,8 +27,16 @@ function changePassword(){
         url: "http://localhost:8081/changePassword" ,
         data: JSON.stringify(changePassword),
         success: function (data) {
-            console.log(data)
-            location.href = "settings.html"
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Change Password Success',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            document.getElementById("oldPassword").value = ""
+            document.getElementById("psw-input").value = ""
+            document.getElementById("confirmNewPassword").value = ""
         },
         error: function (err) {
             document.getElementById('changePasswordError').innerHTML = `  <p style="filter: brightness(120%)" id="messageFailed" class="small-font text-uppercase text-center py-2 text-danger bg-danger-light2 ">Change password fail ! Please try again !</p>`
