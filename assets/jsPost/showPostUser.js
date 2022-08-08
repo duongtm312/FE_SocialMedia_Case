@@ -188,7 +188,7 @@ function changeProfile(data) {
     document.getElementById("job2").innerHTML = data.job
     document.getElementById("address1").innerHTML = data.address
     document.getElementById("start").innerHTML = data.startJoin
-    document.getElementById("cover").style.background.url = data.photoCoverSrc
+    document.getElementById("cover").style.backgroundImage = "url(" +data.photoCoverSrc + ")"
 }
 
 function createCmtt(idPost) {
