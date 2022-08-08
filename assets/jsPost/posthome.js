@@ -1,4 +1,3 @@
-
 let token = localStorage.getItem("token");
 postHome();
 showProfile()
@@ -22,18 +21,26 @@ function postHome() {
             // showProfile()
             show(data);
         }, error: function (err) {
-            console.log("lỗi")
         }
     })
+}
+
+function renderPost(post) {
+    let html = '';
+    $.each(post, function (index, post) {
+
+    });
+    $('')
 }
 
 window.onload = function () {
     let dates = document.querySelectorAll(".nav-divider > span")
     for (let i = 0; i < dates.length; i++) {
-        let d = dates[i]
-        d.innerHTML = moment(d.innerHTML).fromNow()
+        let d = dates[i];
+        d.innerHTML = moment(d.innerHTML).fromNow();
     }
 }
+
 function show(data) {
     console.log("show")
     srcava = localStorage.getItem("avatardn")
@@ -334,8 +341,6 @@ function getComment(idPost) {
 }
 
 
-
-
 function showComment(data, idPost) {
     let str = "";
     for (const cmt of data) {
@@ -358,11 +363,12 @@ function showComment(data, idPost) {
                     <!-- Comment react -->
                     <ul class="nav nav-divider py-2 small">
                       <li class="nav-item">
-                        <a class="nav-link" href="#!" on> Like (${cmt.numLikeCmt})</a>
+                        <a class="nav-link" href="#!" > Like (${cmt.numLikeCmt})</a>
                       </li>
                     </ul>
                   </div>
                 </div>
+                  
                 <!-- Comment item nested START -->
                 <!-- Load more replies -->
                 <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center mb-3 ms-5" data-bs-toggle="button" aria-pressed="true">
@@ -378,10 +384,6 @@ function showComment(data, idPost) {
 
 // create like
 function createLike(id) {
-    // let like = {
-    //     post: {
-    //         id: id
-    //     }
 
     token = localStorage.getItem("token")
     $.ajax({
@@ -484,7 +486,6 @@ function deleteAdd(user) {
 
     })
 }
-
 
 function createCmt(idPost) {
     let contentCmt = $("#cmtContent" + idPost).val();
