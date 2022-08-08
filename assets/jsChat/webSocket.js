@@ -72,9 +72,9 @@ function getChat(data, img, name) {
                     </div>
                     <div class="flex-grow-1">
                       <div class="w-100">
-                        <div class="d-flex flex-column align-items-start">
+                        <div class="d-flex flex-column align-items-start timeAGO">
                           <div class="bg-light text-secondary p-2 px-3 rounded-2">${m.contentMessage}</div>
-                          <div class="small my-2">${m.time}</div>
+                          <span class="small my-2 ">${m.time}</span>
                         </div>
                       </div>
                     </div>
@@ -86,8 +86,8 @@ function getChat(data, img, name) {
                     <div class="w-100">
                       <div class="d-flex flex-column align-items-end">
                         <div class="bg-primary text-white p-2 px-3 rounded-2">${m.contentMessage}</div>
-                        <div class="d-flex my-2">
-                          <div class="small text-secondary">${m.time}</div>
+                        <div class="d-flex my-2 timeAGO">
+                          <span class="small text-secondary ">${m.time}</span>
                           <div class="small ms-2"><i class="fa-solid fa-check-double text-info"></i></div>
                         </div>
                       </div>
@@ -100,6 +100,7 @@ function getChat(data, img, name) {
               <button class="btn btn-sm btn-secondary-soft ms-2"><i class="fa-solid fa-paperclip fs-6"></i></button>
               <button class="btn btn-sm btn-primary ms-2"><i class="fa-solid fa-paper-plane fs-6" id="messageButton" onclick="getUserOn('${name}')" ></i></button>`
 
+    showTime()
 }
 
 function connect(name) {
@@ -195,9 +196,9 @@ function onMessageReceived(payload) {
                     </div>
                     <div class="flex-grow-1">
                       <div class="w-100">
-                        <div class="d-flex flex-column align-items-start">
+                        <div class="d-flex flex-column align-items-start timeAGO">
                           <div class="bg-light text-secondary p-2 px-3 rounded-2">${message.contentMessage}</div>
-                          <span class="small my-2 timeAGO" >${message.time}</span>
+                          <span class="small my-2 " >${message.time}</span>
                         </div>
                       </div>
                     </div>
@@ -210,8 +211,8 @@ function onMessageReceived(payload) {
                     <div class="w-100">
                       <div class="d-flex flex-column align-items-end">
                         <div class="bg-primary text-white p-2 px-3 rounded-2">${message.contentMessage}</div>
-                        <div class="d-flex my-2">
-                          <span class="small text-secondary timeAGO">${message.time}</span>
+                        <div class="d-flex my-2 timeAGO">
+                          <span class="small text-secondary ">${message.time}</span>
                           <div class="small ms-2"><i class="fa-solid fa-check-double text-info"></i></div>
                         </div>
                       </div>
@@ -219,8 +220,9 @@ function onMessageReceived(payload) {
                   </div>`
         showMessage.innerHTML+=str
     }
+    showTime()
 }
-window.onload = function () {
+function showTime () {
     let dates = document.querySelectorAll(".timeAGO > span")
     for (let i = 0; i < dates.length; i++) {
         let d = dates[i]

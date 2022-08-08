@@ -1,3 +1,5 @@
+
+
 let token = localStorage.getItem("token");
 postHome();
 showProfile()
@@ -21,25 +23,13 @@ function postHome() {
             // showProfile()
             show(data);
         }, error: function (err) {
+            console.log("lỗi")
         }
     })
 }
 
-function renderPost(post) {
-    let html = '';
-    $.each(post, function (index, post) {
 
-    });
-    $('')
-}
 
-window.onload = function () {
-    let dates = document.querySelectorAll(".nav-divider > span")
-    for (let i = 0; i < dates.length; i++) {
-        let d = dates[i];
-        d.innerHTML = moment(d.innerHTML).fromNow();
-    }
-}
 
 function show(data) {
     console.log("show")
@@ -136,6 +126,7 @@ function show(data) {
           </div>`
     }
     document.getElementById("showhome").innerHTML = str;
+    showTime()
 }
 
 // show profile
@@ -214,7 +205,7 @@ function showDateProfile(dataProfile) {
                       <a class="nav-link" href="my-profile.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/home-outline-filled.svg" alt=""><span>Feed </span></a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="my-profile-connections.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/person-outline-filled.svg" alt=""><span>Connections </span></a>
+                      <a class="nav-link" href="notifications.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/person-outline-filled.svg" alt=""><span>Search Friends </span></a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="blog.html"> <img class="me-2 h-20px fa-fw" src="assets/images/icon/earth-outline-filled.svg" alt=""><span>Latest News </span></a>
@@ -275,6 +266,8 @@ function showDateProfile(dataProfile) {
     document.getElementById("avatar3").src = dataProfile.avatarSrc;
     document.getElementById("avatar4").src = dataProfile.avatarSrc;
     document.getElementsByClassName("avatar5").src = dataProfile.avatarSrc;
+    document.getElementById("nameRight").innerHTML = dataProfile.fullName
+    document.getElementById("jobRight").innerHTML = dataProfile.job
     // document.getElementsByClassName("avatarCmt").src = dataProfile.avatarSrc;
 
 
@@ -283,7 +276,6 @@ function showDateProfile(dataProfile) {
 
 // create post
 function uploadFile() {
-    console.log("vào up file")
     let fileImg = document.getElementById("img").files;
     console.log(fileImg)
     let formData = new FormData();
@@ -296,6 +288,23 @@ function uploadFile() {
             createPost(data);
         }
     });
+}
+
+
+    function upFile() {
+    let filename = document.getElementById("img");
+    let link=document.getElementById("anh")
+
+    if (filename.files[0]!==undefined){
+    link.files=filename.files
+}
+    if (link.files && link.files[0]){
+    let reader = new FileReader();
+    reader.onload = function (e) {
+    document.getElementById("image").src = e.target.result;
+}
+    reader.readAsDataURL(filename.files[0]);
+}
 }
 
 function createPost(data) {
@@ -328,18 +337,14 @@ function getComment(idPost) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         }, url: "http://localhost:8081/home/comment/" + idPost, //xử lý khi thành công
         success: function (data) {
-            console.log(data)
-            console.log(idPost)
             showComment(data, idPost)
-            console.log("comment")
 
         }, error: function (err) {
-            console.log("loi")
+
             console.log(err)
         }
     })
 }
-
 
 function showComment(data, idPost) {
     let str = "";
@@ -354,21 +359,20 @@ function showComment(data, idPost) {
                   <div class="ms-2">
                     <!-- Comment by -->
                     <div class="bg-light rounded-start-top-0 p-3 rounded">
-                      <div class="d-flex justify-content-between">
+                      <div class="d-flex justify-content-between nav-divider">
                         <h6 class="mb-1"> <a href="#!"> ${cmt.profile.fullName} </a></h6>
-                        <small class="ms-2">${cmt.timeCmt}</small>
+                        <span class="ms-2">${cmt.timeCmt}</span>
                       </div>
                       <p class="small mb-0">${cmt.contentCmt}</p>
                     </div>
                     <!-- Comment react -->
                     <ul class="nav nav-divider py-2 small">
                       <li class="nav-item">
-                        <a class="nav-link" href="#!" > Like (${cmt.numLikeCmt})</a>
+                        <a class="nav-link" href="#!" on> Like (${cmt.numLikeCmt})</a>
                       </li>
                     </ul>
                   </div>
                 </div>
-                  
                 <!-- Comment item nested START -->
                 <!-- Load more replies -->
                 <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center mb-3 ms-5" data-bs-toggle="button" aria-pressed="true">
@@ -380,11 +384,11 @@ function showComment(data, idPost) {
     }
     let id = "showComment" + idPost;
     document.getElementById(id).innerHTML = str;
+    showTime()
 }
 
 // create like
 function createLike(id) {
-
     token = localStorage.getItem("token")
     $.ajax({
         type: "POST", headers: {
@@ -487,6 +491,7 @@ function deleteAdd(user) {
     })
 }
 
+
 function createCmt(idPost) {
     let contentCmt = $("#cmtContent" + idPost).val();
 
@@ -505,6 +510,8 @@ function createCmt(idPost) {
             document.getElementById("cmtContent"+idPost).value = ""
             getComment(idPost);
             postHome()
+            getComment(idPost)
+
 
         }, error: function (err) {
             console.log("loi cmt")
@@ -512,4 +519,11 @@ function createCmt(idPost) {
         }
     })
 }
+ function showTime () {
+    let dates = document.querySelectorAll(".nav-divider > span")
+    for (let i = 0; i < dates.length; i++) {
+        let d = dates[i]
+        d.innerHTML = moment(d.innerHTML).fromNow()
 
+    }
+}
