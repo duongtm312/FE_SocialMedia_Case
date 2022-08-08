@@ -269,7 +269,7 @@ function showDateProfile(dataProfile) {
     document.getElementsByClassName("avatar5").src = dataProfile.avatarSrc;
     document.getElementById("nameRight").innerHTML = dataProfile.fullName
     document.getElementById("jobRight").innerHTML = dataProfile.job
-    // document.getElementsByClassName("avatarCmt").src = dataProfile.avatarSrc;
+    document.getElementsByClassName("avatarCmt").src = dataProfile.avatarSrc;
 
 
 

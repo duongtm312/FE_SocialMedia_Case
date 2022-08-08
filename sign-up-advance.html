@@ -413,7 +413,7 @@
               <span id="register-err"></span>
               <!-- username -->
               <div class="mb-3 input-group-lg">
-                <input type="text" id="username" class="form-control" placeholder="Enter username" required>
+                <input type="text" id="username" class="form-control" placeholder="Enter username" required oninput="checkUser()">
               </div>
               <!-- fullName -->
               <div class="mb-3 input-group-lg">
@@ -421,7 +421,7 @@
               </div>
               <!-- Email -->
               <div class="mb-3 input-group-lg">
-                <input type="email" id="email" class="form-control" placeholder="Enter email" required>
+                <input type="email" id="email" class="form-control" placeholder="Enter email" required oninput="checkMail()">
               </div>
               <!-- New password -->
               <div class="mb-3 position-relative">
@@ -444,7 +444,7 @@
               </div>
               <!-- Confirm password -->
               <div class="mb-3 input-group-lg">
-                <input class="form-control" type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <input class="form-control" type="password" id="confirmPassword" placeholder="Confirm Password" required oninput="checkPassWord()">
               </div>
               <!-- Keep me signed in -->
               <div class="mb-3 text-start">
