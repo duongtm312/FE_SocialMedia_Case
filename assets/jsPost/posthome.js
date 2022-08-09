@@ -1,5 +1,3 @@
-
-
 let token = localStorage.getItem("token");
 postHome();
 showProfile()
@@ -29,8 +27,6 @@ function postHome() {
         }
     })
 }
-
-
 
 
 function show(data) {
@@ -272,7 +268,6 @@ function showDateProfile(dataProfile) {
     document.getElementsByClassName("avatarCmt").src = dataProfile.avatarSrc;
 
 
-
 }
 
 // create post
@@ -292,20 +287,20 @@ function uploadFile() {
 }
 
 
-    function upFile() {
+function upFile() {
     let filename = document.getElementById("img");
-    let link=document.getElementById("anh")
+    let link = document.getElementById("anh")
 
-    if (filename.files[0]!==undefined){
-    link.files=filename.files
-}
-    if (link.files && link.files[0]){
-    let reader = new FileReader();
-    reader.onload = function (e) {
-    document.getElementById("image").src = e.target.result;
-}
-    reader.readAsDataURL(filename.files[0]);
-}
+    if (filename.files[0] !== undefined) {
+        link.files = filename.files
+    }
+    if (link.files && link.files[0]) {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById("image").src = e.target.result;
+        }
+        reader.readAsDataURL(filename.files[0]);
+    }
 }
 
 function createPost(data) {
@@ -320,7 +315,7 @@ function createPost(data) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
         }, url: "http://localhost:8081/home/createPost ", data: JSON.stringify(post), //xử lý khi thành công
         success: function (data) {
-            document.getElementById("stt").value =""
+            document.getElementById("stt").value = ""
             document.getElementById("img").value = ""
             postHome()
         }, error: function (err) {
@@ -443,9 +438,11 @@ function showAddFriend(data) {
                     <p class="mb-0 small text-truncate">${af.profile.job}</p>
                   </div>
                   <!-- Button -->
-                  <a class="btn btn-primary-soft rounded-circle icon-md ms-auto" onclick="acceptFriend('${af.appUser1.userName}')" href="#"><i class="fa-solid fa-plus"> </i></a>
-
-                </div>`
+                </div>
+<div>
+  <button class="btn btn-sm py-1 btn-primary me-2" onclick="acceptFriend('${af.appUser1.userName}')">Accept </button>
+                  <button class="btn btn-sm py-1 btn-danger-soft" onclick="deleteAdd('${af.appUser1.userName}')">Delete </button>
+</div>`
 
     }
     str += `<div class="d-grid mt-3">
@@ -484,6 +481,7 @@ function deleteAdd(user) {
             user: user,
         }, url: "http://localhost:8081/deleteAdd", //xử lý khi thành công
         success: function (data) {
+            getAddFriend()
         }, error: function (err) {
             console.log(err)
         }
@@ -507,7 +505,7 @@ function createCmt(idPost) {
         }, url: "http://localhost:8081/home/createComment ", data: JSON.stringify(comments), //xử lý khi thành công
         success: function (data) {
             console.log("cmt thanh cong")
-            document.getElementById("cmtContent"+idPost).value = ""
+            document.getElementById("cmtContent" + idPost).value = ""
             getComment(idPost);
             postHome()
             getComment(idPost)
@@ -519,7 +517,8 @@ function createCmt(idPost) {
         }
     })
 }
-function showTime () {
+
+function showTime() {
     let dates = document.querySelectorAll(".nav-divider > span")
     for (let i = 0; i < dates.length; i++) {
         let d = dates[i]

@@ -261,6 +261,7 @@ function showCommentt(data,idPost){
                         <div class="d-flex justify-content-between nav-divider">
                           <h6 class="mb-1"> <a href="#!"> ${cmt.profile.fullName} </a></h6>
                           <span class="ms-2">${cmt.timeCmt}</span>
+                          <button type="button" class="btn-close" onclick="deleteCmt(${cmt.idComment})"></button>
                         </div>
                         <p class="small mb-0">${cmt.contentCmt}</p>
                       </div>
@@ -346,5 +347,25 @@ function upFileCover() {
 }
 
 
+function deleteCmt (idComment){
+    let token = localStorage.getItem("token");
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json',
+        },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
+        url: "http://localhost:8081/home/deleteCmt/" +idComment,
+        success: function (data) {
+            getPost()
+            console.log("xoa thanh cong")
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
 
+}
 
