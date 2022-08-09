@@ -54,9 +54,9 @@ function checkUser() {
             userName: userName,
         },
         success: function (data) {
-            document.getElementById("register-err").innerHTML = `  <p style="filter: brightness(120%)" id="messageFailed" class="small-font text-uppercase text-center py-2 text-danger bg-danger-light2 ">"Account already exists!</p>`
-        },
+            },
         error() {
+            document.getElementById("register-err").innerHTML = `  <p style="filter: brightness(120%)" id="messageFailed" class="small-font text-uppercase text-center py-2 text-danger bg-danger-light2 ">"Account already exists!</p>`
 
         }
     })
@@ -76,9 +76,9 @@ function checkMail() {
             email: email,
         },
         success: function (data) {
-            document.getElementById("register-err").innerHTML = `  <p style="filter: brightness(120%)" id="messageFailed" class="small-font text-uppercase text-center py-2 text-danger bg-danger-light2 ">"Email already exists!</p>`
-        },
+             },
         error() {
+            document.getElementById("register-err").innerHTML = `  <p style="filter: brightness(120%)" id="messageFailed" class="small-font text-uppercase text-center py-2 text-danger bg-danger-light2 ">"Email already exists!</p>`
 
         }
     })
